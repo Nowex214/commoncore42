@@ -13,22 +13,22 @@
 #include <stdio.h>
 #include <string.h>
 
-char    *strrchr(const char *str, int i)
+char	*ft_strrchr(const char *str, int i)
 {
-    int j;
-    char    *c;
+	int		j;
+	char	*c;
 
-    j = 0;
-    c = NULL;
-    while (str[j])
-    {
-        if (str[j] == (char)i)
-            c = ((char *)&str[j]);
-        j++;
-    }
-    if (str[j] == (char)i)
-        return ((char *)&str[j]);
-    return (c);
+	j = 0;
+	c = NULL;
+	while (str[j])
+	{
+		if (str[j] == (char)i)
+			c = ((char *)&str[j]);
+		j++;
+	}
+	if (str[j] == (char)i)
+		return ((char *)&str[j]);
+	return (c);
 }
 /*
 int main(void)

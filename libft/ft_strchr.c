@@ -12,8 +12,9 @@
 
 #include <string.h>
 #include <stdio.h>
+#include "libft.h"
 
-char	*strchr(const char *str, int i)
+char	*ft_strchr(const char *str, int i)
 {
 	int	j;
 

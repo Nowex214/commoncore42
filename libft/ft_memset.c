@@ -18,7 +18,6 @@ void	*ft_memset(void *ptr, int value, size_t len)
 	size_t	i;
 
 	i = 0;
-
 	if (!ptr)
 		return (NULL);
 	while (i < len)

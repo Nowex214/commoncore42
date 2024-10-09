@@ -13,22 +13,22 @@
 #include <string.h>
 #include <stdio.h>
 
-void    *memchr(const void *memB, int chrC, size_t len)
+void	*memchr(const void *memB, int chrC, size_t len)
 {
-    size_t i;
-    char *str;
+	size_t	i;
+	char	*str;
 
-    if (memB == NULL)
-        return (NULL);
-    i = 0;
-    str = (void *)memB;
-    while (i < len)
-    {
-        if (str[i] == (char) chrC)
-            return (&str[i]);
-        i++;
-    }
-    return (NULL);
+	if (memB == NULL)
+		return (NULL);
+	i = 0;
+	str = (void *)memB;
+	while (i < len)
+	{
+		if (str[i] == (char) chrC)
+			return (&str[i]);
+		i++;
+	}
+	return (NULL);
 }
 /*
 int main(void)

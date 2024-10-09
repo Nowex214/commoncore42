@@ -11,18 +11,18 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "libft.h"
 
 int	ft_isalnum(int i)
 {
-	if (i > 32 && i < 126)
+	if (ft_isalpha && ft_isdigit)
 		return (1);
 	return (0);
 }
-/*
+
 int	main(int ac, char **av)
 {
 	if (ac == 2)
 		printf("output:%d", ft_isalnum(av[1][0]));
 	return (0);
 }
-*/
