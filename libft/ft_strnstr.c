@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
+/*   By: ehenry <ehenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 22:15:02 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/06 22:15:02 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/10/22 09:48:19 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	j = 0;
@@ -50,7 +50,8 @@ int main(void)
     if (result != NULL)
         printf("Sous-chaîne trouvée : \"%s\"\n", result);
     else
-        printf("Sous-chaîne non trouvée dans la limite de %zu caractères.\n", len);
+        printf("Sous-chaîne non trouvée dans 
+		la limite de %zu caractères.\n", len);
 
     return 0;
 }

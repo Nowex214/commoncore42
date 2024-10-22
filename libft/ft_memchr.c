@@ -3,25 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
+/*   By: ehenry <ehenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 21:31:45 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/06 21:31:45 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/10/22 11:56:51 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
+#include "libft.h"
 
-void	*memchr(const void *memB, int chrC, size_t len)
+void	*ft_memchr(const void *memB, int chrC, size_t len)
 {
 	size_t	i;
 	char	*str;
 
-	if (memB == NULL)
-		return (NULL);
 	i = 0;
-	str = (void *)memB;
+	str = (char *)memB;
 	while (i < len)
 	{
 		if (str[i] == (char) chrC)
@@ -39,7 +36,8 @@ int main(void)
 
     res = memchr(memB, ch, sizeof(memB));
     if (res != NULL)
-        printf("Le caractère '%c' a été trouvé à la position: %ld\n", ch, res - memB);
+        printf("Le caractère '%c' a été 
+			trouvé à la position: %ld\n", ch, res - memB);
     else
         printf("le caractère '%c' n'a pas été trouvé.\n", ch);
     return (0);

@@ -3,26 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
+/*   By: ehenry <ehenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 21:25:08 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/01 21:25:08 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/10/21 15:31:11 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
+#include "libft.h"
 
 void	*ft_bzero(void *ptr, size_t len)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < len)
-	{
-		*(unsigned char *)(ptr + i) = 0;
-		i++;
-	}
+	return (ft_memset(ptr, 0, len));
 }
 /*
 int	main(void)

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
+/*   By: ehenry <ehenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 20:51:20 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/06 20:51:20 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/10/21 14:33:28 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
+#include "libft.h"
 
 char	*ft_strrchr(const char *str, int i)
 {
@@ -39,7 +38,8 @@ int main(void)
 
     res = strrchr(str,ch);
     if (res != NULL)
-        printf ("Dernière occurence de '%c' trouvée à la position: %ld\n", ch, res - str);
+        printf ("Dernière occurence de '%c' 
+			trouvée à la position: %ld\n", ch, res - str);
     else
         printf ("Le caractère '%c' n'a pas été trouvé.\n", ch);
     return (0);

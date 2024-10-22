@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehenry <ehenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 22:22:16 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/21 14:17:01 by ehenry           ###   ########.fr       */
+/*   Created: 2024/10/22 11:36:54 by ehenry            #+#    #+#             */
+/*   Updated: 2024/10/22 12:00:49 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_toupper(int i)
+void	*ft_calloc(size_t count, size_t size)
 {
-	if (i >= 'a' && i <= 'z')
-		return (i - 32);
-	return (i);
+	char	*dest;
+
+	dest = calloc(count * size, sizeof(char));
+	if (!dest)
+		return (NULL);
+	ft_memset(dest, 0, count * size);
+	return (dest);
 }
-/*
-int	main(void)
-{
-	char c = 'b';
-	printf("%c -> %c\n", c, ft_toupper(c));
-	c = 'Z';
-	printf("%c -> %c\n", c, ft_toupper(c));
-	return (0);
-}
-*/

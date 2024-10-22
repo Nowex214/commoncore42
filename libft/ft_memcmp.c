@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 21:59:34 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/06 21:59:34 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/10/21 14:12:19 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,14 @@ int	main(void)
 
 	res = memcmp(b1, b2, len);
 	if (res == 0)
-		printf("Les %zu premiers octets des deux blocks sont identiques.\n", len);
+		printf("Les %zu premiers octets des 
+			deux blocks sont identiques.\n", len);
 	else if (res < 0)
-		printf("le premier bloc est inférieur au deuxième dans les %zu premiers octets.\n", len);
+		printf("le premier bloc est inférieur au 
+			deuxième dans les %zu premiers octets.\n", len);
 	else
-		printf("Le premier bloc est supérieur au deuxième dans les %zu premiers octets.\n", len);
+		printf("Le premier bloc est supérieur au 
+			deuxième dans les %zu premiers octets.\n", len);
 	return (0);
 }
 */

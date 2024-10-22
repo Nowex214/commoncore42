@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isalnum.c                                          :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehenry <ehenry@student42.luxemborug.lu>    +#+  +:+       +#+        */
+/*   By: ehenry <ehenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:48:40 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/01 20:48:40 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/10/21 15:24:05 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "libft.h"
 
 int	ft_isalnum(int i)
 {
-	if (ft_isalpha && ft_isdigit)
+	if (ft_isalpha(i) && ft_isdigit(i))
 		return (1);
 	return (0);
 }
-
+/*
 int	main(int ac, char **av)
 {
 	if (ac == 2)
 		printf("output:%d", ft_isalnum(av[1][0]));
 	return (0);
 }
+*/

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
+/*   By: ehenry <ehenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 21:52:15 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/01 21:52:15 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/10/21 15:37:50 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "libft.h"
 
 void	*ft_memcpy(void *dest, const void *src, size_t len)
 {
@@ -24,6 +24,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t len)
 		*(unsigned char *)(dest + i) = *(unsigned char *)(src + i);
 		i++;
 	}
+	return (dest);
 }
 /*
 int		main(void)

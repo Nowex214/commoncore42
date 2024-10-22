@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 21:16:20 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/06 21:16:20 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/10/21 14:13:50 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,14 @@ int main(void)
     result = strncmp(str1, str2, len);
     
     if (result == 0)
-        printf("Les %zu premiers caractères des deux chaînes sont identiques.\n", len);
+        printf("Les %zu premiers caractères 
+		des deux chaînes sont identiques.\n", len);
     else if (result < 0)
-        printf("La première chaîne est plus petite que la deuxième dans les %zu premiers caractères.\n", len);
+        printf("La première chaîne est plus petite 
+		que la deuxième dans les %zu premiers caractères.\n", len);
     else
-        printf("La première chaîne est plus grande que la deuxième dans les %zu premiers caractères.\n", len);
+        printf("La première chaîne est plus grande 
+		que la deuxième dans les %zu premiers caractères.\n", len);
 
     return 0;
 }
