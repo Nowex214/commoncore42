@@ -17,11 +17,11 @@ char	*ft_strdup(char *src)
 	size_t	len;
 	char	*dest;
 
-	len = ft_strlen(src + 1);
-	dest = (char *)malloc(len);
+	len = ft_strlen(src);
+	dest = (char *)malloc(len + 1);
 	if (!dest)
 		return (NULL);
-	ft_strlcpy(dest, src, len);
+	ft_strlcpy(dest, src, len + 1);
 	return (dest);
 }
 /*

@@ -1,6 +1,6 @@
-NAME = libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+NAME = libft.a
 LIBFT = ft_atoi.c\
 	ft_bzero.c\
 	ft_isalnum.c\
@@ -24,10 +24,15 @@ LIBFT = ft_atoi.c\
 	ft_strdup.c\
 	ft_substr.c\
 	ft_strlen.c\
-	ft_calloc.c
+	ft_calloc.c\
+	ft_strjoin.c\
+	ft_strtrim.c\
+	ft_split.c\
+	ft_itoa.c
 
 OBJS = $(LIBFT:.c=.o)
 AR = ar rcs
+
 all: $(NAME)
 
 $(NAME): $(OBJS)

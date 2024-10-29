@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:06:19 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/22 11:58:34 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/10/29 13:26:05 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ char	*ft_strrchr(const char *str, int i);
 char	*ft_strchr(const char *str, int i);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(char *src);
-
+char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	**ft_split(const char *str, char c);
+char	*ft_itao(int n);
 void	*ft_memchr(const void *memB, int chrC, size_t len);
 void	*ft_bzero(void *ptr, size_t len);
 void	*ft_memset(void *ptr, int value, size_t len);
@@ -40,8 +43,8 @@ int		ft_isdigit(int i);
 int		ft_isascii(int i);
 int		ft_isalpha(int i);
 int		ft_isalnum(int i);
-int		memcmp(const void *pt1, const void *pt2, size_t len);
-int		strncmp(const char *s1, const char *s2, size_t len);
+int		ft_memcmp(const void *pt1, const void *pt2, size_t len);
+int		ft_strncmp(const char *s1, const char *s2, size_t len);
 int		ft_strlcat(char *dest, char *src, size_t size);
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
