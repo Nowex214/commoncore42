@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehenry <ehenry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:06:19 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/29 13:26:05 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/10/29 14:59:30 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*ft_memmove(void *dest, const void *src, size_t len);
 void	*ft_memcpy(void *dest, const void *src, size_t len);
 void	*ft_calloc(size_t count, size_t size);
 
-int		ft_atoi(char *str);
+int		ft_atoi(const char *str);
 int		ft_toupper(int i);
 int		ft_tolower(int i);
 int		ft_strlen(const char *str);

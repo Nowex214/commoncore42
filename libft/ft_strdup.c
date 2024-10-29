@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehenry <ehenry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 17:35:47 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/22 11:56:16 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/10/29 15:01:47 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*ft_strdup(char *src)
 		return (NULL);
 	ft_strlcpy(dest, src, len + 1);
 	return (dest);
+	free(dest);
 }
 /*
 int	main(void)
