@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 23:16:15 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/29 14:58:32 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/10/29 15:53:34 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	ft_atoi(const char *str)
 		str++;
 	if (*str == '-' || *str == '+')
 	{
-			if(*str == '-')
-				sign = -1;
-			str++;
+		if (*str == '-')
+			sign = -1;
+		str++;
 	}
 	if (*str < '0' || *str > '9')
 		return (0);

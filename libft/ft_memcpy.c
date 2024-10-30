@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehenry <ehenry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 21:52:15 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/21 15:37:50 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/10/30 10:42:18 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t len)
 	size_t	i;
 
 	i = 0;
-	if (!src)
-		return (NULL);
+	if (dest == src || len == 0)
+		return (dest);
 	while (i < len)
 	{
 		*(unsigned char *)(dest + i) = *(unsigned char *)(src + i);
