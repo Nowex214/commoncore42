@@ -1,40 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/30 16:46:58 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/04 09:05:57 by ehenry           ###   ########.fr       */
+/*   Created: 2024/11/04 09:16:25 by ehenry            #+#    #+#             */
+/*   Updated: 2024/11/04 09:19:03 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	t_list	*tmp;
-
-	if (lst && del)
+	if (lst && (del))
 	{
-		while (*lst)
-		{
-			tmp = (*lst)->next;
-			ft_lstdelone(*lst, del);
-			*lst = tmp;
-		}
+		(del)(lst->content);
+		free(lst);
 	}
 }
-/*
-int main(void)
-{
-	t_list	*list;
-	t_list	*new;
-
-	list = ft_lstnew("Hello World!");
-	new = ft_lstnew("Bonjour le monde!");
-	ft_lstadd_front(&list, new);
-	ft_lstclear(&list, free);
-	return (0);
-}*/
