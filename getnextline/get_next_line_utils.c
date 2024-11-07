@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:49:56 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/06 16:55:56 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/07 13:41:18 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	ft_strlen(char *str)
 
 char	*ft_strdup(char *src)
 {
-	int i;
-	int len;
-	char *dest;
+	int		i;
+	int		len;
+	char	*dest;
 
 	len = 0;
 	while (src[len])
@@ -49,31 +49,24 @@ char	*ft_strdup(char *src)
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
+	size_t	j;
 	char	*str;
 
-	if (!str)
-		return (NULL);
-	i = ft_strlen((char *)s);
-	if (start >= i)
-	{
-		str = malloc(sizeof(char));
-		if (!s)
-			return (NULL);
-		str[0] = '\0';
-		return (str);
-	}
-	if (len > i - start)
-		len = i - start;
-	str = malloc(sizeof(char) * len + 1);
-	if (!str)
+	str = (char *)malloc(sizeof(*s) * (len + 1));
+	if (str == 0)
 		return (NULL);
 	i = 0;
-	while (i < len && s[start + i])
+	j = 0;
+	while (s[i])
 	{
-		str[i] = s[start + i];
+		if (i >= start && j < len)
+		{
+			str[j] = s[i];
+			j++;
+		}
 		i++;
 	}
-	str[i] = '\0';
+	str[j] = 0;
 	return (str);
 }
 
@@ -85,20 +78,34 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	i = 0;
 	j = 0;
-	str = malloc(sizeof(char) * (ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1));
+	str = malloc(sizeof(char) * (ft_strlen((char *)s1) + ft_strlen((char *)s2)
+				+ 1));
 	if (!str)
 		return (NULL);
-		while (s1[i])
-		{
-			str[i] = s1[i];
-			i++;
-		}
-		while (s2[j])
-		{
-			str[i] = s2[j];
-			i++;
-			j++;
-		}
-		str[i] = '\0';
-		return (str);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char	*ft_strchr(const char *str, int c)
+{
+	while (*str)
+	{
+		if (*str == (char)c)
+			return ((char *)str);
+		str++;
+	}
+	if (*str == (char)c)
+		return ((char *)str);
+	return (NULL);
 }
