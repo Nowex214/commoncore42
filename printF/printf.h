@@ -22,6 +22,8 @@ int		ft_putunbr(unsigned int nb);
 int		ft_putnbr(int nb);
 int		ft_putpointer(void *ptr);
 int		ft_puthex(size_t nbr, char format);
+int		ft_printf(const char *format, ...);
+int		ft_putstr(char *str);
 
 char	*ft_strchr(const char *str, int i);
 
