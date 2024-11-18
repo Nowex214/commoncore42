@@ -6,17 +6,26 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 17:27:06 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/17 17:27:06 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:04:39 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	ft_putstr(char *str)
+int	ft_putstr(va_list args)
 {
-	int	i;
+	int len;
+	char *str;
 
-	i = 0;
-	while (str[i])
-		ft_putchar(str[i++]);
+	len = 0;
+	str = va_arg(args, char *);
+	if (!str)
+		str = "(null)";
+	while (*str)
+	{
+		write(1, str, 1);
+		str++;
+		len++;
+	}
+	return (len);
 }

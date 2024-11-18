@@ -6,7 +6,7 @@
 #    By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/17 17:06:24 by ehenry            #+#    #+#              #
-#    Updated: 2024/11/17 17:06:24 by ehenry           ###   ########.fr        #
+#    Updated: 2024/11/18 10:56:35 by ehenry           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ SRCS = ft_printf.c\
 		ft_putpointer.c\
 		ft_putstr.c\
 		ft_putunbr.c\
-		ft_strchr.c\
 
 AR = ar rcs
 OBJS = $(SRCS:.c=.o)

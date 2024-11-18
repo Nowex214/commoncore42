@@ -6,32 +6,42 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:01:35 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/17 18:01:35 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/18 11:24:36 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	ft_putnbr(int nb)
+static int	ft_digit_count(int nbr)
 {
-	if (nb == -2147483648)
+	int	len;
+
+	len = 0;
+	if (nbr >= 10)
+		len += ft_digit_count(nbr / 10);
+	ft_putchar((nbr % 10) + '0');
+	len++;
+	return (len);
+}
+int ft_putnbr(va_list args)
+{
+	int	len;
+	int nbr;
+
+	nbr = va_arg(args, int);
+	len = 0;
+	if(nbr == -2147483648)
 	{
-		write (1, "-2147483648", 11);
-		return ;
+		write(1, "-2147483648", 11);
+		len = 11;
+		return (len);
 	}
-	if (nb < 0)
+	if (nbr < 0)
 	{
 		ft_putchar('-');
-		nb = -nb;
+		nbr = -nbr;
+		len++;
 	}
-	if (nb > 9)
-	{
-		ft_putnbr(nb / 10);
-		ft_putchar(nb % 10 + '0');
-	}
-	if (nb < 10)
-	{
-		ft_putchar(nb + 48);
-	}
-	return (1);
+	len += ft_digit_count(nbr);
+	return (len);
 }

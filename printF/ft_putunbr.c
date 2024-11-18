@@ -6,22 +6,32 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:06:52 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/17 18:06:52 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:09:08 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	ft_putunbr(unsigned int nb)
+static int	ft_putnbr_static(unsigned int nbr)
 {
-	if (nb > 9)
+	int	len;
+
+	len = 0;
+	if (nbr >= 10)
 	{
-		ft_putunbr(nb / 10);
-		ft_putchar(nb % 10 + '0');
+		len += ft_putnbr_static(nbr / 10);
 	}
-	if (nb < 10)
-	{
-		ft_putchar(nb + 48);
-	}
-	return (1);
+	ft_putchar((nbr % 10) + '0');
+	len++;
+	return (len);
+}
+int	ft_putunbr(va_list args)
+{
+	int	len;
+	unsigned int	nbr;
+
+	len = 0;
+	nbr = va_arg(args, unsigned int);
+	len += ft_putnbr_static(nbr);
+	return (len);
 }

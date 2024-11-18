@@ -6,14 +6,14 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 17:09:45 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/17 17:09:45 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/18 10:39:52 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 int	ft_putchar(char c)
 {
-	write (1, &c , 1);
+	write (1, &c, 1);
 	return (1);
 }
