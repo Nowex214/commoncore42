@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 17:07:29 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/18 11:46:07 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:16:19 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-
 			format++;
 			i += ft_va_list(args, *format);
 		}

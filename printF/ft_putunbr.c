@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:06:52 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/18 12:09:08 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:21:41 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ static int	ft_putnbr_static(unsigned int nbr)
 	len++;
 	return (len);
 }
+
 int	ft_putunbr(va_list args)
 {
-	int	len;
+	int				len;
 	unsigned int	nbr;
 
 	len = 0;

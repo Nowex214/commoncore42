@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:01:35 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/18 11:24:36 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:18:25 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ static int	ft_digit_count(int nbr)
 	len++;
 	return (len);
 }
-int ft_putnbr(va_list args)
+
+int	ft_putnbr(va_list args)
 {
 	int	len;
-	int nbr;
+	int	nbr;
 
 	nbr = va_arg(args, int);
 	len = 0;
-	if(nbr == -2147483648)
+	if (nbr == -2147483648)
 	{
 		write(1, "-2147483648", 11);
 		len = 11;
