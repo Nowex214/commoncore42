@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehenry <ehenry@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:49:18 by ehenry            #+#    #+#             */
-/*   Updated: 2024/10/22 13:43:07 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/04 11:12:39 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*ft_memset(void *ptr, int value, size_t len)
 /*
 int	main(void)
 {
-	char str[50] = "nique ta mère simon";
+	char str[50] = "bah moi je suis pas gay comme simon";
 
 	printf("output: %s\n",str);
 	ft_memset(str, 'A', 5);

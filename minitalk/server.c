@@ -6,17 +6,19 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:04:47 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/19 20:53:45 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/20 16:36:08 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "printF/ft_printf.h"
 #include <signal.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 static void	ft_signal_handler(int signum)
 {
 	static size_t	bit_count;
-	static char	received_bytes;
+	static char		received_bytes;
 
 	bit_count = 0;
 	if (signum == SIGUSR1)
@@ -26,9 +28,26 @@ static void	ft_signal_handler(int signum)
 	bit_count++;
 	if (bit_count == 8)
 	{
-		ft_printf(&received_bytes);
+		ft_printf("%c", received_bytes);
 		received_bytes = 0;
 		bit_count = 0;
 	}
 }
 
+int	main(int ac, char **av)
+{
+	pid_t	pid;
+
+	if (ac != 1)
+	{
+		ft_printf("Usage: %s\n", av[0]);
+		return (1);
+	}
+	pid = getpid();
+	ft_printf("Server PID: %d\n", pid);
+	signal(SIGUSR1, ft_signal_handler);
+	signal(SIGUSR2, ft_signal_handler);
+	while (1)
+		pause();
+	return (0);
+}
