@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 14:48:15 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/18 09:25:59 by ehenry           ###   ########.fr       */
+/*   Created: 2024/11/18 14:43:30 by ehenry            #+#    #+#             */
+/*   Updated: 2024/11/18 16:45:03 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
+# endif
+
+# ifndef FD_SIZE
+#  define FD_SIZE 42
 # endif
 
 char	*ft_strdup(char *src);

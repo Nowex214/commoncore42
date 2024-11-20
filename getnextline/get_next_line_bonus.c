@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/06 14:49:28 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/18 09:56:05 by ehenry           ###   ########.fr       */
+/*   Created: 2024/11/18 14:42:51 by ehenry            #+#    #+#             */
+/*   Updated: 2024/11/18 16:58:04 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*ft_fill_line_buffer(int fd, char **left_c, char *buffer)
 {
@@ -63,12 +63,12 @@ static char	*ft_set_line(char *line_buffer)
 
 char	*get_next_line(int fd)
 {
-	static char	*left_c;
+	static char	*left_c[FD_SIZE];
 	char		*line;
 	char		*buffer;
 
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || FD_SIZE <= 0 || fd > FD_SIZE)
 	{
 		free(buffer);
 		buffer = NULL;
@@ -76,11 +76,11 @@ char	*get_next_line(int fd)
 	}
 	if (!buffer)
 		return (NULL);
-	line = ft_fill_line_buffer(fd, &left_c, buffer);
+	line = ft_fill_line_buffer(fd, &left_c[fd], buffer);
 	free(buffer);
 	buffer = NULL;
 	if (!line)
 		return (NULL);
-	left_c = ft_set_line(line);
+	left_c[fd] = ft_set_line(line);
 	return (line);
 }
