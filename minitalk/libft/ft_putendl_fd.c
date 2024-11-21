@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 17:06:37 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/20 16:05:58 by ehenry           ###   ########.fr       */
+/*   Created: 2024/10/30 09:03:47 by ehenry            #+#    #+#             */
+/*   Updated: 2024/10/30 09:52:07 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdarg.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
+void	ft_putendl_fd(char *s, int fd)
+{
+	int	i;
 
-int	ft_putchar(char c);
-int	ft_putunbr(va_list args);
-int	ft_putnbr(va_list args);
-int	ft_putpointer(void *ptr);
-int	ft_puthex(size_t nbr, char format);
-int	ft_printf(const char *format, ...);
-int	ft_putstr(va_list args);
-
-#endif
+	i = 0;
+	while (s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
+	ft_putchar_fd('\n', fd);
+}

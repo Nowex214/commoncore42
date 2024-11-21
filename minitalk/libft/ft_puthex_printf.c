@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putpointer.c                                    :+:      :+:    :+:   */
+/*   ft_puthex_printf.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 18:13:50 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/18 12:18:43 by ehenry           ###   ########.fr       */
+/*   Created: 2024/11/17 18:23:04 by ehenry            #+#    #+#             */
+/*   Updated: 2024/11/21 11:30:10 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
 static int	ft_put_nbr_base(size_t nbr, char *base)
 {
@@ -24,14 +24,11 @@ static int	ft_put_nbr_base(size_t nbr, char *base)
 	return (i);
 }
 
-int	ft_putpointer(void *ptr)
+int	ft_puthex(size_t nbr, char format)
 {
-	int	i;
-
-	i = 0;
-	if (!ptr)
-		return (write(1, "(nil)", 5));
-	i += write(1, "0x", 2);
-	i += ft_put_nbr_base((size_t)ptr, "0123456789abcdef");
-	return (i);
+	if (format == 'x')
+		return (ft_put_nbr_base(nbr, "0123456789abcdef"));
+	if (format == 'X')
+		return (ft_put_nbr_base(nbr, "0123456789ABCDEF"));
+	return (0);
 }

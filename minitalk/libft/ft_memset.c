@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putunbr.c                                       :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 18:06:52 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/18 12:21:41 by ehenry           ###   ########.fr       */
+/*   Created: 2024/10/01 20:49:18 by ehenry            #+#    #+#             */
+/*   Updated: 2024/11/04 11:12:39 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-static int	ft_putnbr_static(unsigned int nbr)
+void	*ft_memset(void *ptr, int value, size_t len)
 {
-	int	len;
+	size_t	i;
 
-	len = 0;
-	if (nbr >= 10)
+	i = 0;
+	if (!ptr)
+		return (NULL);
+	while (i < len)
 	{
-		len += ft_putnbr_static(nbr / 10);
+		*(unsigned char *)(ptr + i) = (unsigned char) value;
+		i++;
 	}
-	ft_putchar((nbr % 10) + '0');
-	len++;
-	return (len);
+	return (ptr);
 }
-
-int	ft_putunbr(va_list args)
+/*
+int	main(void)
 {
-	int				len;
-	unsigned int	nbr;
+	char str[50] = "bah moi je suis pas gay comme simon";
 
-	len = 0;
-	nbr = va_arg(args, unsigned int);
-	len += ft_putnbr_static(nbr);
-	return (len);
+	printf("output: %s\n",str);
+	ft_memset(str, 'A', 5);
+	printf("output: %s\n",str);
+	return (0);
 }
+*/

@@ -6,11 +6,11 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:04:47 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/20 16:36:08 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/21 15:46:00 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printF/ft_printf.h"
+#include "../libft/libft.h"
 #include <signal.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -37,10 +37,11 @@ static void	ft_signal_handler(int signum)
 int	main(int ac, char **av)
 {
 	pid_t	pid;
+	(void)av;
 
 	if (ac != 1)
 	{
-		ft_printf("Usage: %s\n", av[0]);
+		ft_printf("Usage: %s\n");
 		return (1);
 	}
 	pid = getpid();

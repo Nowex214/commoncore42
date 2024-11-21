@@ -6,12 +6,13 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:51:37 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/20 16:29:42 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/21 15:41:51 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printF/ft_printf.h"
+#include "../libft/libft.h"
 #include <signal.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 void	ft_send_bytes(int pid, char *bytes, size_t len)
@@ -34,4 +35,21 @@ void	ft_send_bytes(int pid, char *bytes, size_t len)
 		}
 		i++;
 	}
+}
+
+int	main(int ac, char **av)
+{
+	pid_t	pid;
+	char	*message;
+	(void)av;
+
+	if (ac != 3)
+	{
+		ft_printf("Usage: %s <PID> <message>\n");
+		return (1);
+	}
+	pid = ft_atoi(av[1]);
+	message = av[2];
+	ft_send_bytes(pid, message, ft_strlen(message));
+	return (0);
 }

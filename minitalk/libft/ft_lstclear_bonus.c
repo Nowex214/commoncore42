@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthex.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 18:23:04 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/18 12:17:17 by ehenry           ###   ########.fr       */
+/*   Created: 2024/10/30 16:46:58 by ehenry            #+#    #+#             */
+/*   Updated: 2024/11/04 09:05:57 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-static int	ft_put_nbr_base(size_t nbr, char *base)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	int	i;
+	t_list	*tmp;
 
-	i = 0;
-	if (nbr >= 16)
-		i += ft_put_nbr_base(nbr / 16, base);
-	ft_putchar(base[nbr % 16]);
-	i++;
-	return (i);
+	if (lst && del)
+	{
+		while (*lst)
+		{
+			tmp = (*lst)->next;
+			ft_lstdelone(*lst, del);
+			*lst = tmp;
+		}
+	}
 }
-
-int	ft_puthex(size_t nbr, char format)
+/*
+int main(void)
 {
-	if (format == 'x')
-		return (ft_put_nbr_base(nbr, "0123456789abcdef"));
-	if (format == 'X')
-		return (ft_put_nbr_base(nbr, "0123456789ABCDEF"));
+	t_list	*list;
+	t_list	*new;
+
+	list = ft_lstnew("Hello World!");
+	new = ft_lstnew("Bonjour le monde!");
+	ft_lstadd_front(&list, new);
+	ft_lstclear(&list, free);
 	return (0);
-}
+}*/

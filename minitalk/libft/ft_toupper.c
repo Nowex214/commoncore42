@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
+/*   By: ehenry <ehenry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 17:27:06 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/18 12:24:03 by ehenry           ###   ########.fr       */
+/*   Created: 2024/10/02 22:22:16 by ehenry            #+#    #+#             */
+/*   Updated: 2024/10/21 14:17:01 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_putstr(va_list args)
+int	ft_toupper(int i)
 {
-	int		len;
-	char	*str;
-
-	len = 0;
-	str = va_arg(args, char *);
-	if (!str)
-		str = "(null)";
-	while (*str)
-	{
-		write(1, str, 1);
-		str++;
-		len++;
-	}
-	return (len);
+	if (i >= 'a' && i <= 'z')
+		return (i - 32);
+	return (i);
 }
+/*
+int	main(void)
+{
+	char c = 'b';
+	printf("%c -> %c\n", c, ft_toupper(c));
+	c = 'Z';
+	printf("%c -> %c\n", c, ft_toupper(c));
+	return (0);
+}
+*/
