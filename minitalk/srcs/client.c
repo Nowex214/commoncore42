@@ -6,14 +6,11 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:51:37 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/21 15:41:51 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/21 20:14:40 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include <signal.h>
-#include <sys/types.h>
-#include <unistd.h>
+#include "minitalk.h"
 
 void	ft_send_bytes(int pid, char *bytes, size_t len)
 {
@@ -39,17 +36,27 @@ void	ft_send_bytes(int pid, char *bytes, size_t len)
 
 int	main(int ac, char **av)
 {
-	pid_t	pid;
-	char	*message;
-	(void)av;
+	int	pid;
+	int	i;
 
+	i = 0;
 	if (ac != 3)
 	{
-		ft_printf("Usage: %s <PID> <message>\n");
+		write(1, "Error: wrong format.\n", 21);
+		write(1, "Try: ./client <PID> <message>\n", 30);
+		ft_printf("Error: wrong format.\n");
+		ft_printf("Try: ./client <PID> <message>");
 		return (1);
 	}
-	pid = ft_atoi(av[1]);
-	message = av[2];
-	ft_send_bytes(pid, message, ft_strlen(message));
+	else
+	{
+		pid = ft_atoi(av[1]);
+		while (av[2][i])
+		{
+			ft_send_bytes(pid, &av[2][i], 1);
+			i++;
+		}
+		ft_send_bytes(pid, '\n', 1);
+	}
 	return (0);
 }

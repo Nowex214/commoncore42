@@ -89,7 +89,7 @@ $(NAME): $(OBJS) $(OBJS_PRINTF) $(OBJS_GNL) $(OBJS_BONUS)
 %.o: %.c
 	$(eval CURRENT := $(shell echo $$(($(CURRENT)+1))))
 	@$(CC) $(CFLAGS) -c $< -o $@ || { $(ECHO) "$(RED)Error: Compilation failed for $<!$(DEF_COLOR)"; exit 1; }
-	@printf "\r$(WHITE)Progress: [%d/%d] %d%% $(DEF_COLOR) > $(YELLOW)Compiling: %s$(DEF_COLOR)" $(CURRENT) $(TOTAL_OBJS) $$(($(CURRENT)*100/$(TOTAL_OBJS))) $<
+	@printf "\r\033[K$(WHITE)Progress: [%d/%d] %d%% $(DEF_COLOR) > $(YELLOW)Compiling: %s$(DEF_COLOR)" $(CURRENT) $(TOTAL_OBJS) $$(($(CURRENT)*100/$(TOTAL_OBJS))) $<
 	@sleep 0.00001
 
 clean:
