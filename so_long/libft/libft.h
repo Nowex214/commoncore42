@@ -68,6 +68,7 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
+void				ft_send_bytes(int pid, char *bytes, size_t len);
 
 int					ft_atoi(const char *str);
 int					ft_toupper(int i);

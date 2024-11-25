@@ -3,32 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
+/*   By: logname <logname@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 15:51:37 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/21 20:14:40 by ehenry           ###   ########.fr       */
+/*   Created: 2024/11/21 21:13:18 by logname           #+#    #+#             */
+/*   Updated: 2024/11/25 00:49:30 by logname          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/20 15:51:37 by ehenry            #+#    #+#             */
+/*   Updated: 2024/11/25 00:49:19 by ehenry          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	ft_send_bytes(int pid, char *bytes, size_t len)
+#include "../libft/libft.h"
+
+void	ft_send_bytes(int pid, const char *bytes, size_t len)
 {
 	size_t	i;
-	size_t	bit_index;
+	int	bit_index;
 
 	i = 0;
-	bit_index = 7;
 	while (i < len)
 	{
-		while (bit_index >= 0)
+		bit_index = 0;
+		while (bit_index < 8)
 		{
 			if ((bytes[i] >> bit_index) & 1)
 				kill(pid, SIGUSR2);
 			else
 				kill(pid, SIGUSR1);
-			bit_index--;
-			usleep(10000);
+			bit_index++;
+			usleep(100);
 		}
 		i++;
 	}
@@ -42,10 +54,8 @@ int	main(int ac, char **av)
 	i = 0;
 	if (ac != 3)
 	{
-		write(1, "Error: wrong format.\n", 21);
-		write(1, "Try: ./client <PID> <message>\n", 30);
 		ft_printf("Error: wrong format.\n");
-		ft_printf("Try: ./client <PID> <message>");
+		ft_printf("Try: ./client <PID> <message>\n");
 		return (1);
 	}
 	else
@@ -56,7 +66,7 @@ int	main(int ac, char **av)
 			ft_send_bytes(pid, &av[2][i], 1);
 			i++;
 		}
-		ft_send_bytes(pid, '\n', 1);
+		ft_send_bytes(pid, "\n", 1);
 	}
 	return (0);
 }
