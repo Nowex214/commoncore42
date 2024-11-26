@@ -18,7 +18,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <fcntl.h>
-# include "../minilibx/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 
 typedef struct s_game
