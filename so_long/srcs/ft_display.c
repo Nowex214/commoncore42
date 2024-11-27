@@ -6,11 +6,25 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:32:25 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/25 17:20:24 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/27 16:29:46 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	player(t_game *game, int height, int width)
+{
+	mlx_put_image_to_window(game->mlx_environment,
+			game->display_window, game->player, width * 32, height * 32);
+	game->y_axis = height;
+	game->x_axis = width;
+}
+void	place_collectable(t_game *game, int height, int width)
+{
+	mlx_put_image_to_window(game->mlx_environment,
+		game->display_window, game->collectable, width * 32, height * 32);
+	game->collectable++;
+}
 
 void	sprite(t_game *game)
 {
@@ -39,6 +53,7 @@ void	add_graphics(t_game *game)
 	y = 0;
 	while (game->heightmap > y)
 	{
+		x = 0;
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == '0')

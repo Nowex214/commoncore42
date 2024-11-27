@@ -2,16 +2,20 @@
 SHELL = /bin/bash
 NAME = so_long
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g -O0 -I$(MINILIBX_DIR) -I$(LIBFT_DIR)
 AR = ar rcs
 ECHO = echo
 CURRENT = 0
 
 #Library
-MINILIBX_DIR = minilibx
+MINILIBX_DIR = minilibx-linux
 MINILIBX = $(MINILIBX_DIR)/libmlx.a
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
+
+#Flags de liaison
+LIBS = -L$(MINILIBX_DIR) -lmlx -lXext -lX11 -lm -lz -L$(LIBFT_DIR) -lft
+
 #Colors
 DEF_COLOR	=	\x1b[0m
 ORANGE		=	\x1b[0;33m
@@ -25,15 +29,16 @@ CYAN		=	\x1b[0;96m
 WHITE		=	\x1b[0;97m
 
 #files
-GAME_RULES = game_rules/ft_controls.c\
-			game_rules/ft_display.c\
-			game_rules/ft_maps.c\
-			game_rules/so_long.c
+SRCS = srcs/ft_controls.c\
+            srcs/ft_display.c\
+            srcs/ft_maps.c\
+			srcs/so_long.c\
+			srcs/ft_handling_error.c
 
 #Objects
-OBJS_GAME_RULES = $(GAME_RULES:.c=.o)
+OBJS_SRCS = $(SRCS:.c=.o)
 
-TOTAL_OBJS = $(shell echo $$(($(words $(OBJS_GAME_RULES)))))
+TOTAL_OBJS = $(shell echo $$(($(words $(OBJS_SRCS)))))
 
 
 #Compilation
@@ -43,10 +48,10 @@ $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
 $(MINILIBX):
-	$(MAKE) -C $(MINILIBX_DIR) X11_INCLUDE=/usr/include/X11 X11_LIB=/usr/lib
+	$(MAKE) -s -C $(MINILIBX_DIR) X11_INCLUDE=/usr/include/X11 X11_LIB=/usr/lib
 
-$(NAME): $(OBJS_GAME_RULES) $(LIBFT) $(MINILIBX)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS_GAME_RULES) $(LIBFT) $(MINILIBX)
+$(NAME): $(OBJS_SRCS) $(LIBFT) $(MINILIBX)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS_SRCS) $(LIBFT) $(MINILIBX) $(LIBS)
 	@printf "\r\x1b[K$(WHITE)Progress: [%d/%d] 100%% > $(DEF_COLOR) $(GREEN)Compilation completed$(DEF_COLOR)\n" $(TOTAL_OBJS) $(TOTAL_OBJS)
 
 %.o: %.c
@@ -55,12 +60,16 @@ $(NAME): $(OBJS_GAME_RULES) $(LIBFT) $(MINILIBX)
 	@printf "\r$(WHITE)Progress: [%d/%d] %d%% $(DEF_COLOR) > $(YELLOW)Compiling: %s$(DEF_COLOR)" $(CURRENT) $(TOTAL_OBJS) $$(($(CURRENT)*100/$(TOTAL_OBJS))) $<
 	@sleep 0.00001
 
+# Clean target
 clean:
-	@rm -f $(OBJS_GAME_RULES)
-	@$(ECHO) "$(BLUE)Cleaning completed!$(DEF_COLOR)"
+	@rm -f $(OBJS) $(OBJS_SRCS)
+	@$(MAKE) -s -C $(MINILIBX_DIR) clean
+	@$(MAKE) -s -C $(LIBFT_DIR) clean
 
+# Fully clean target
 fclean: clean
-	@rm -f $(NAME) $(TOTAL_OBJS)
+	@rm -f $(NAME)
+	@$(MAKE) -s -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:32:49 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/25 17:41:19 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/27 16:39:21 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,39 +28,31 @@ static int	append_map(t_game *game, char *line)
 {
 	char	**tmp;
 	size_t	i;
+	size_t	heightmap;
 
-	i = 0;
 	if (!line)
-		return (0);
+	heightmap = (size_t)game->heightmap;
+	if (heightmap == game->map_capacity)
+	if (game->heightmap == game->map_capacity)
+	{
+		size_t new_capacity = (game->map_capacity == 0) ? 1 : game->map_capacity * 2;
+		tmp = (char **)malloc(sizeof(char *) * new_capacity);
+		if (!tmp)
+		{
+			ft_error("Memory allocation failed");
+			return (0);
+		}
+		i = 0;
+		while (i < game->heightmap)
+		{
+			tmp[i] = game->map[i];
+			i++;
+		}
+		free(game->map);
+		game->map = tmp;
+		game->map_capacity = new_capacity;
+	}
+	game->map[game->heightmap] = line;
 	game->heightmap++;
-	tmp = (char **)malloc(sizeof(char *) * (game->heightmap + 1));
-	if (!tmp)
-		return (0);
-	while (game->heightmap - 1 <= i)
-	{
-		tmp[i] = game->map[i];
-		i++;
-	}
-	tmp[i] = line;
-	free(game->map);
-	game->map = tmp;
-	return (1);
-}
-
-int	map_read(t_game *game, char **av)
-{
-	char	*read;
-
-	game->fd = open(av[1], O_RDONLY);
-	if (game->fd < 0)
-		return (0);
-	while(1)
-	{
-		read = get_next_line(game->fd);
-		if (!append_map(game, read))
-			break ;
-	}
-	close (game->fd);
-	game->widthmap = width_map(game->map[0]);
 	return (1);
 }
