@@ -9,8 +9,10 @@ CURRENT = 0
 
 #Library
 MINILIBX_DIR = minilibx-linux
-MINILIBX = $(MINILIBX_DIR)/libmlx.a
 LIBFT_DIR = libft
+SRCS_DIR = srcs
+OBJS_DIR = objs
+MINILIBX = $(MINILIBX_DIR)/libmlx.a
 LIBFT = $(LIBFT_DIR)/libft.a
 
 #Flags de liaison
@@ -29,17 +31,13 @@ CYAN		=	\x1b[0;96m
 WHITE		=	\x1b[0;97m
 
 #files
-SRCS = srcs/ft_controls.c\
-            srcs/ft_display.c\
-            srcs/ft_maps.c\
-			srcs/so_long.c\
-			srcs/ft_handling_error.c
+SRCS = $(addprefix $(SRCS_DIR)/, read_map/display_file.c\
+								read_map/read_map.c\
+								core_game/error.c)
 
 #Objects
-OBJS_SRCS = $(SRCS:.c=.o)
-
+OBJS_SRCS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 TOTAL_OBJS = $(shell echo $$(($(words $(OBJS_SRCS)))))
-
 
 #Compilation
 all: $(NAME) $(LIBFT) $(MINILIBX)
@@ -54,22 +52,20 @@ $(NAME): $(OBJS_SRCS) $(LIBFT) $(MINILIBX)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS_SRCS) $(LIBFT) $(MINILIBX) $(LIBS)
 	@printf "\r\x1b[K$(WHITE)Progress: [%d/%d] 100%% > $(DEF_COLOR) $(GREEN)Compilation completed$(DEF_COLOR)\n" $(TOTAL_OBJS) $(TOTAL_OBJS)
 
-%.o: %.c
-	$(eval CURRENT := $(shell echo $$(($(CURRENT)+1))))
-	@$(CC) $(CFLAGS) -c $< -o $@ || { $(ECHO) "$(RED)Error: Compilation failed for $<!$(DEF_COLOR)"; exit 1; }
-	@printf "\r$(WHITE)Progress: [%d/%d] %d%% $(DEF_COLOR) > $(YELLOW)Compiling: %s$(DEF_COLOR)" $(CURRENT) $(TOTAL_OBJS) $$(($(CURRENT)*100/$(TOTAL_OBJS))) $<
-	@sleep 0.00001
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Clean target
+#Clean
 clean:
-	@rm -f $(OBJS) $(OBJS_SRCS)
-	@$(MAKE) -s -C $(MINILIBX_DIR) clean
-	@$(MAKE) -s -C $(LIBFT_DIR) clean
+	rm -rf $(OBJS_DIR)
+	-$(MAKE) -C $(LIBFT_DIR) clean
+	-$(MAKE) -C $(MINILIBX_DIR) clean
 
-# Fully clean target
+#Fully clean
 fclean: clean
 	@rm -f $(NAME)
-	@$(MAKE) -s -C $(LIBFT_DIR) fclean
+	-@$(MAKE) -s -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

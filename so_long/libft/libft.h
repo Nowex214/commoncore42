@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:06:19 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/21 15:37:47 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/28 14:44:17 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int					ft_puthex(size_t nbr, char format);
 int					ft_printf(const char *format, ...);
 int					ft_putstr(va_list args);
 int					ft_lstsize(t_list *lst);
+int					ft_strcmp(char *s1, char *s2);
 
 size_t				ft_strlcpy(char *dest, const char *src, size_t size);
 
