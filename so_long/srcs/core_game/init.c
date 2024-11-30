@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 13:29:23 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/28 13:30:44 by ehenry           ###   ########.fr       */
+/*   Created: 2024/11/29 21:42:54 by ehenry            #+#    #+#             */
+/*   Updated: 2024/11/29 21:42:54 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	error(const char *msg)
+void	init_game(char **av, t_game *game)
 {
-	if(msg)
-		ft_printf("%s\n", msg);
-	exit(0);
-}
-
-void	show_debug(t_game *game)
-{
-	if (game->debug)
-	{
-		mlx_string_put(game->mlx_environment, game->display_window, 10, 10,
-			0xFFFFFF, "DEBUG MODE!!!");
-	}
+	game->mlx_environment = mlx_init();
+	game->widthmap = -1;
+	game->heightmap = -1;
+	if (av[2] && ft_strcmp(av[2], "DEBUG=1") == 0)
+		game->debug = 1;
+	else
+		game->debug = 0;
+	game->player = ft_calloc(sizeof(t_player), 1);
+	if (!game->player)
+		exit(EXIT_FAILURE);
+	game->player->jumpstate = 0;
+	
 }

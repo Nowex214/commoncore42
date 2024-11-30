@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 13:29:23 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/28 13:30:44 by ehenry           ###   ########.fr       */
+/*   Created: 2024/11/29 22:59:09 by ehenry            #+#    #+#             */
+/*   Updated: 2024/11/29 22:59:09 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	error(const char *msg)
+int	map_check(t_game *game)
 {
-	if(msg)
-		ft_printf("%s\n", msg);
-	exit(0);
-}
+	char	*line;
+	size_t	i;
 
-void	show_debug(t_game *game)
-{
-	if (game->debug)
+	i = 0;
+	while ((line = get_next_line(game->fd)) != NULL)
 	{
-		mlx_string_put(game->mlx_environment, game->display_window, 10, 10,
-			0xFFFFFF, "DEBUG MODE!!!");
+		if ((size_t)ft_strlen(line) != game->widthmap)
+			return (error("Error: width map incorrect"));
+		if (i == 0 || i == game->heightmap - 1)
+		{
+			if (line[0] != '1' || line[game->widthmap - 1] != '1')
+				return (error("Error: map not inclosed by walls"));
+		}
+		free(line);
+		i++;
 	}
+	return (1);
 }

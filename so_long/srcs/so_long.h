@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 13:21:12 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/28 14:50:55 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/11/29 23:47:35 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,36 @@
 # include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 
+//Constants
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 600
+# define WINDOW_TITLE "so_long ehenry"
+# define BPX 32
+
+typedef struct s_player {
+	int		jumpstate;
+	int		life;
+	int		numberlive;
+	int		direction;
+	int		playerpos;
+}	t_player;
+//Main game structure
 typedef struct s_game
 {
 	int		fd;
 	int		map_fd;
+	int		map_capacity;
+	int		x_axis;
+	int		y_axis;
+	int		debug;
+	
 	size_t	heightmap;
 	size_t	widthmap;
 
-	int	map_capacity;
+	t_list	*player;
 	
-	int		x_axis;
-	int		y_axis;
-
 	char	**map;
-
+	void	*player_img;
 	void	*ground;
 	void	*wall;
 	void	*player;
@@ -47,7 +63,7 @@ typedef struct s_game
 }	t_game;
 
 //Function for the read_map
-int		chek_debug_option(int ac, char **av);
+int		check_debug_option(int ac, char **av);
 int		verification(t_game *game, char *file_path);
 int		count_map_lines(t_game *game, char *file_path);
 int		read_map(t_game *game, char *file_path);

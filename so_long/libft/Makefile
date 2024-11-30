@@ -27,6 +27,7 @@ LIBFT = ft_atoi.c\
 	ft_tolower.c\
 	ft_toupper.c\
 	ft_strdup.c\
+	ft_strcmp.c\
 	ft_substr.c\
 	ft_strlen.c\
 	ft_calloc.c\
