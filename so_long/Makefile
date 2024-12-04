@@ -1,7 +1,7 @@
 SHELL = /bin/sh
 
 NAME = so_long
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Werror -Wextra -I$(MINILIBX_DIR) -I$(LIBFT_DIR)
 MINIFLAGS = -L$(MINILIBX_DIR) -lmlx -L/usr/X11/lib -lXext -lX11 -lm -lbsd
 AR = ar rcs
@@ -12,10 +12,14 @@ MINILIBX_DIR = minilibx-linux
 LIBFT = $(LIBFT_DIR)/libft.a
 MINILIBX = $(MINILIBX_DIR)/libmlx.a
 
-SRCS = srcs/core_game/error.c \
-		srcs/core_game/main.c \
-		srcs/read_map/display_file.c \
-		srcs/read_map/read_map.c
+SRCS = srcs/core/graphics.c\
+		srcs/core/main.c\
+		srcs/core/read_map.c\
+		srcs/core/control.c\
+		srcs/tools/camera.c\
+		srcs/core/found.c\
+		srcs/tools/frame.c\
+		srcs/core/mouvement.c
 
 OBJS = $(SRCS:.c=.o)
 

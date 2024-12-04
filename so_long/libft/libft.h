@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:06:19 by ehenry            #+#    #+#             */
-/*   Updated: 2024/11/28 14:44:17 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/04 16:08:13 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <fcntl.h>
+# include <errno.h>
 # include <stdarg.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -21,6 +22,7 @@
 # include <unistd.h>
 # include <signal.h>
 # include <sys/types.h>
+# include <sys/time.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -42,7 +44,6 @@ char				*ft_strchr(const char *str, int i);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strdup(char *src);
 char				*ft_strtrim(char const *s1, char const *set);
-char				*ft_strjoin(char const *s1, char const *s2);
 char				**ft_split(const char *str, char c);
 char				*ft_itoa(int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -68,7 +69,6 @@ void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
-void				ft_send_bytes(int pid, char *bytes, size_t len);
 
 int					ft_atoi(const char *str);
 int					ft_toupper(int i);
@@ -91,7 +91,6 @@ int					ft_puthex(size_t nbr, char format);
 int					ft_printf(const char *format, ...);
 int					ft_putstr(va_list args);
 int					ft_lstsize(t_list *lst);
-int					ft_strcmp(char *s1, char *s2);
 
 size_t				ft_strlcpy(char *dest, const char *src, size_t size);
 
