@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:44:58 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/04 22:01:57 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/07 11:01:24 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int calculate_fps(void *param)
 		frame_count = 0;
 		last_time = current_time;
 		game->fps = (int)fps;
-		printf("FPS: %.2f\n", fps);
+		//printf("FPS: %.2f\n", fps);
 	}
 	return (0);
 }

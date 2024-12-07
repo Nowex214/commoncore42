@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:03:54 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/04 21:47:17 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/07 14:09:03 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	find_player(t_game *game)
 		{
 			if (game->map.map[y][x] == 'P')
 			{
-				game->x_axis = x;
-				game->y_axis = y;
+				game->player.player_x = x;
+				game->player.player_y = y;
 				return ;
 			}
 			x++;

@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 18:26:26 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/04 21:47:42 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/07 14:08:28 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void update_camera(t_game *game)
 	int player_x;
 	int player_y;
 
-	player_x = game->x_axis * SPRITE_SIZE;
-	player_y = game->y_axis * SPRITE_SIZE;
+	player_x = game->player.player_x * SPRITE_SIZE;
+	player_y = game->player.player_y * SPRITE_SIZE;
 	game->cam.cam_x = (player_x / WIN_WIDTH) * WIN_WIDTH;
 	game->cam.cam_y = (player_y / WIN_HEIGHT) * WIN_HEIGHT;
 	if (game->cam.cam_x < 0)
@@ -39,8 +39,8 @@ void handle_camera(t_game *game, int move_success)
 
 	if (move_success)
 	{
-		player_x = game->x_axis * SPRITE_SIZE;
-		player_y = game->y_axis * SPRITE_SIZE;
+		player_x = game->player.player_x * SPRITE_SIZE;
+		player_y = game->player.player_y * SPRITE_SIZE;
 		if (player_x < game->cam.cam_x || player_x >= game->cam.cam_x + WIN_WIDTH ||
 			player_y < game->cam.cam_y || player_y >= game->cam.cam_y + WIN_HEIGHT)
 		{

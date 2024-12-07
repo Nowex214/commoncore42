@@ -19,7 +19,9 @@ SRCS = srcs/core/graphics.c\
 		srcs/tools/camera.c\
 		srcs/core/found.c\
 		srcs/tools/frame.c\
-		srcs/core/mouvement.c
+		srcs/core/mouvement.c\
+		srcs/tools/hud.c\
+		srcs/animation/player_anim.c
 
 OBJS = $(SRCS:.c=.o)
 

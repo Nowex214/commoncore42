@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:15:18 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/04 21:47:28 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/07 14:39:25 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 static int initialize_game(t_game *game, char **av)
 {
-	ft_memset(game, 0, sizeof(t_game));
-	if (!read_map(game, av[1]))
-		return (0);
-	count_collectables(game);
+	memset(&game->input, 0, sizeof(game->input));
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (0);
-
+	if (!read_map(game, av[1]))
+		return (0);
 	if (game->map.wmap * 96 > WIN_WIDTH)
 		game->cam.win_width = WIN_WIDTH;
 	else
@@ -32,7 +30,10 @@ static int initialize_game(t_game *game, char **av)
 	game->win = mlx_new_window(game->mlx, game->cam.win_width, game->cam.win_height, "So_long ehenry");
 	game->cam.cam_x = 0;
 	game->cam.cam_y = 0;
+	game->player.last_direction = 'R';
+	count_collectables(game);
 	find_player(game);
+	
 	update_camera(game);
 	return (1);
 }
@@ -53,9 +54,10 @@ int	exit_game(t_game *game)
 
 int setup_game(t_game *game)
 {
-	load_images(game);
+	int height;
 
-	int height = 0;
+	load_images(game);
+	height = 0;
 	while (height < game->map.hmap)
 	{
 		int width = 0;
@@ -71,6 +73,14 @@ int setup_game(t_game *game)
 	return (0);
 }
 
+int	combined_loop(void *param)
+{
+	t_game *game = (t_game *)param;
+	calculate_fps(game);
+	update_player_animation(game);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_game	game;
@@ -81,6 +91,7 @@ int	main(int ac, char **av)
 		return (0);
 	setup_game(&game);
 	mlx_key_hook(game.win, input, &game);
-	mlx_loop_hook(game.mlx, calculate_fps, &game);
+	mlx_key_hook(game.win, handle_key, &game);
+	mlx_loop_hook(game.mlx, combined_loop, &game);
 	mlx_loop(game.mlx);
 }

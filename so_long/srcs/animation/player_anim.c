@@ -6,43 +6,45 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:31:04 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/04 21:31:46 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/07 14:39:25 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../srcs/so_long.h"
+#include "../so_long.h"
 
-void render_player_animation(t_game *game)
+void update_animation(t_animation *anim, int fps)
 {
-	t_animation *anim;
-
-	anim = &game->player.idle_anim;
-	if (anim->frames && anim->frames->content)
+	if (!anim || !anim->frames)
+		return ;
+	anim->delay_counter += fps;
+	if (anim->delay_counter >= anim->frame_delay)
 	{
-		mlx_put_image_to_window(game->mlx, game->win, anim->frames->content,
-			game->player.player_x * SPRITE_SIZE - game->cam.cam_x, 
-			game->player.player_y * SPRITE_SIZE - game->cam.cam_y);
+		anim->delay_counter = 0;
+		if (anim->frames->next)
+			anim->frames = anim->frames->next;
+		else
+			anim->frames = anim->start;
+		ft_putchar_fd('\n', 1);
 	}
 }
+
 int update_player_animation(void *param)
 {
-	t_game *game = (t_game *)param;
-	t_animation *anim = &game->player.idle_anim;
+	t_game		*game;
+	t_animation	*anim;
 
-	if (game->input.up == 0 && game->input.down == 0 && game->input.left == 0 && game->input.right == 0)
+	game = (t_game *)param;
+	if (game->input.left)
 	{
-		if (!anim->frames)
-		{
-			if (game->player.last_direction == 'L' && !anim->frames)
-				anim->frames = load_animation_frames(game, "./sprite/player/idle_l/", 10);
-			else if (game->player.last_direction == 'R' && !anim->frames)
-				anim->frames = load_animation_frames(game, "./sprite/player/idle_r/", 10);
-			
-			anim->frame_count = 10;
-			anim->frame_delay = 6;
-			anim->delay_counter = 0;
-		}
-		update_animation(anim, game->fps);
+		game->player.last_direction = 'L';
+		anim = &game->player.idle_left;
+		update_animation(anim, 1);
 	}
-	return 0;
+	else if (game->input.right)
+	{
+		game->player.last_direction = 'R';
+		anim = &game->player.idle_right;
+		update_animation(anim, 1);
+	}
+	return (0);
 }

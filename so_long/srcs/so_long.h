@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:22:59 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/04 21:52:17 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/07 14:39:25 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,26 @@
 # define KEY_INTERACT 101	// E
 
 
+# define XPM_COLLECTABLE	"sprite/collectable.xpm"
+# define XPM_WALL			"sprite/wall.xpm"
+# define XPM_GROUND			"sprite/ground.xpm"
+# define XPM_LIFE_BAR		"sprite/livebar.xpm"
+# define XPM_PLAYER_RIGHT	"sprite/player_right.xpm"
+# define XPM_PLAYER_LEFT	"sprite/player_left.xpm"
+# define XPM_EXIT_OPEN		"sprite/open_door.xpm"
+# define XPM_EXIT_CLOSE 	"sprite/close_door.xpm"
+
+
 # define WIN_WIDTH 1008
 # define WIN_HEIGHT 528
+
+typedef enum e_direction
+{
+    DIR_UP = 1,
+    DIR_DOWN,
+    DIR_LEFT,
+    DIR_RIGHT
+}   t_direction;
 
 typedef struct	s_map
 {
@@ -38,9 +56,11 @@ typedef struct	s_map
 
 	void		*ground;
 	void		*wall;
-	void		*player;
-	void 		*exit;
+	void 		*door_close;
+	void		*door_open;
 	void		*collectible;
+	void		*player_left;
+	void		*player_right;
 }	t_map;
 
 typedef struct	s_imput
@@ -70,14 +90,25 @@ typedef struct	s_animation
 	t_list	*frames;
 }	t_animation;
 
+typedef struct	s_lifebar
+{
+	int	x;
+	int	y;
+	int	width;
+	int	height;
+	int	spacing;
+}	t_lifebar;
+
 typedef struct	s_player
 {
 	int			mouvement;
+	int			life;
 	int			player_x;
 	int			player_y;
-	int			life;
+	void		*life_sprite;
 	char		last_direction;
-	t_animation	idle_anim;
+	t_animation	idle_left;
+	t_animation	idle_right;
 }	t_player;
 
 typedef struct	s_game
@@ -86,8 +117,6 @@ typedef struct	s_game
 	void		*win;
 
 	int			fd;
-	int			x_axis;
-	int			y_axis;
 	int			fps;
 
 	long long	lenght;
@@ -98,17 +127,18 @@ typedef struct	s_game
 
 }	t_game;
 
+void		show_life(t_game *game);
 void		count_collectables(t_game *game);
 void		update_camera(t_game *game);
 void		handle_camera(t_game *game, int move_success);
 void		find_player(t_game *game);
-void		place_graphics(t_game *game, void *image, int height, int width);
 void		process_map(t_game *game);
 void		load_images(t_game *game);
+void		place_graphics(t_game *game, void *image, int height, int width);
 
-int			add_graphics(t_game *game, int height, int width);
-int 		handle_key_press(int key, t_game *game);
-int 		handle_key_release(int key, t_game *game);
+int			handle_key(int key, t_game *game);
+int 		add_graphics(t_game *game, int height, int width);
+int			update_player_animation(void *param);
 int			process_movement(int command, t_game *game);
 int			read_map(t_game *game, char *file);
 int			input(int command, t_game *game);
@@ -117,8 +147,7 @@ int			move_vertical(t_game *game, int direction);
 int			move_horizontal(t_game *game, int direction);
 int			move_to_tile(t_game *game, int x, int y);
 int 		calculate_fps(void *param);
-
+void move_player(t_game *game, int x, int y);
 long long	get_time_in_ms(void);
-
 
 #endif
