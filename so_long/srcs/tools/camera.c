@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 18:26:26 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/07 14:08:28 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/10 11:19:28 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,35 @@
 
 void update_camera(t_game *game)
 {
-	int player_x;
-	int player_y;
+	int	player_x;
+	int	player_y;
 
 	player_x = game->player.player_x * SPRITE_SIZE;
 	player_y = game->player.player_y * SPRITE_SIZE;
-	game->cam.cam_x = (player_x / WIN_WIDTH) * WIN_WIDTH;
-	game->cam.cam_y = (player_y / WIN_HEIGHT) * WIN_HEIGHT;
+	if (player_x < game->cam.cam_x)
+		game->cam.cam_x -= WIN_WIDTH;
+	else if (player_x >= game->cam.cam_x + WIN_WIDTH)
+		game->cam.cam_x += WIN_WIDTH;
+	if (player_y < game->cam.cam_y)
+		game->cam.cam_y -= WIN_HEIGHT;
+	else if (player_y >= game->cam.cam_y + WIN_HEIGHT)
+		game->cam.cam_y += WIN_HEIGHT;
 	if (game->cam.cam_x < 0)
 		game->cam.cam_x = 0;
-	if (game->cam.cam_x > (game->map.wmap * SPRITE_SIZE) - WIN_WIDTH)
+	else if (game->cam.cam_x > (game->map.wmap * SPRITE_SIZE) - WIN_WIDTH)
 		game->cam.cam_x = (game->map.wmap * SPRITE_SIZE) - WIN_WIDTH;
 
 	if (game->cam.cam_y < 0)
 		game->cam.cam_y = 0;
-	if (game->cam.cam_y > (game->map.hmap * SPRITE_SIZE) - WIN_HEIGHT)
+	else if (game->cam.cam_y > (game->map.hmap * SPRITE_SIZE) - WIN_HEIGHT)
 		game->cam.cam_y = (game->map.hmap * SPRITE_SIZE) - WIN_HEIGHT;
 }
+
 
 void handle_camera(t_game *game, int move_success)
 {
 	int player_x;
-	int player_y;
+	int	player_y;
 
 	if (move_success)
 	{
@@ -48,7 +55,6 @@ void handle_camera(t_game *game, int move_success)
 		}
 		mlx_clear_window(game->mlx, game->win);
 		process_map(game);
-		ft_printf("movement: %d\n", game->player.mouvement);
-		ft_printf("collectible: %d\n", game->map.collectibles_remaining);
 	}
 }
+

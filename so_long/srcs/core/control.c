@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:32:56 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/07 14:39:25 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/10 11:52:42 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,18 @@ int	move_horizontal(t_game *game, int direction)
 	return (move_to_tile(game, new_x, game->player.player_y));
 }
 
-int	process_movement(int command, t_game *game)
+int process_movement(int command, t_game *game)
 {
 	if (command == KEY_ESC)
 		exit_game(game);
 	else if (command == KEY_UP)
+	{
 		return (move_vertical(game, -1));
+	}
 	else if (command == KEY_DOWN)
+	{
 		return (move_vertical(game, 1));
+	}
 	else if (command == KEY_LEFT)
 	{
 		game->player.last_direction = 'L';
@@ -54,29 +58,16 @@ int	process_movement(int command, t_game *game)
 }
 
 
-int	handle_key(int key, t_game *game)
+int	input(int command, t_game *game)
 {
-	if (key == KEY_UP)
-		game->input.up = 1;
-	else if (key == KEY_DOWN)
-		game->input.down = 1;
-	else if (key == KEY_LEFT)
-		game->input.left = 1;
-	else if (key == KEY_RIGHT)
-		game->input.right = 1;
-	else if (key == KEY_INTERACT)
-		game->input.interact = 1;
-	if (key == KEY_UP)
-		game->input.up = 0;
-	else if (key == KEY_DOWN)
-		game->input.down = 0;
-	else if (key == KEY_LEFT)
-		game->input.left = 0;
-	else if (key == KEY_RIGHT)
-		game->input.right = 0;
-	else if (key == KEY_INTERACT)
-		game->input.interact = 0;
-	process_movement(key, game);
-	return (0);
-}
+	int	move_success;
 
+	move_success = process_movement(command, game);
+	if (move_success)
+	{
+		ft_printf("Movement: %d\n", game->player.mouvement);
+		ft_printf("Collectables: %d\n", game->map.collectibles_remaining);
+	}
+	handle_camera(game, move_success);
+	return (1);
+}

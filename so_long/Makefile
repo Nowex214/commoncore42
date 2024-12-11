@@ -2,8 +2,8 @@ SHELL = /bin/sh
 
 NAME = so_long
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -I$(MINILIBX_DIR) -I$(LIBFT_DIR)
-MINIFLAGS = -L$(MINILIBX_DIR) -lmlx -L/usr/X11/lib -lXext -lX11 -lm -lbsd
+CFLAGS = -Wall -Werror -Wextra -g -I$(MINILIBX_DIR) -I$(LIBFT_DIR)
+MINIFLAGS = -L$(MINILIBX_DIR) -lmlx -L/usr/X11/lib -lXext -lX11 -lm -lbsd 
 AR = ar rcs
 RM = rm -f
 
@@ -21,7 +21,7 @@ SRCS = srcs/core/graphics.c\
 		srcs/tools/frame.c\
 		srcs/core/mouvement.c\
 		srcs/tools/hud.c\
-		srcs/animation/player_anim.c
+		srcs/animation/idle_anim.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:15:18 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/07 14:39:25 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/11 14:48:22 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int initialize_game(t_game *game, char **av)
 {
-	memset(&game->input, 0, sizeof(game->input));
+	ft_memset(game, 0, sizeof(t_game));
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (0);
@@ -24,16 +24,14 @@ static int initialize_game(t_game *game, char **av)
 		game->cam.win_width = WIN_WIDTH;
 	else
 		game->cam.win_width = game->map.wmap * 96;
-
 	if (game->map.hmap * 96 > WIN_HEIGHT)
 		game->cam.win_height = WIN_HEIGHT;
 	game->win = mlx_new_window(game->mlx, game->cam.win_width, game->cam.win_height, "So_long ehenry");
-	game->cam.cam_x = 0;
-	game->cam.cam_y = 0;
 	game->player.last_direction = 'R';
 	count_collectables(game);
 	find_player(game);
-	
+	load_idle_left(game);
+	load_idle_right(game);
 	update_camera(game);
 	return (1);
 }
@@ -78,6 +76,10 @@ int	combined_loop(void *param)
 	t_game *game = (t_game *)param;
 	calculate_fps(game);
 	update_player_animation(game);
+	if (game->player.last_direction == 'L')
+		idle_left_loop(game);
+	else if (game->player.last_direction == 'R')
+		idle_right_loop(game);
 	return (0);
 }
 
@@ -91,7 +93,6 @@ int	main(int ac, char **av)
 		return (0);
 	setup_game(&game);
 	mlx_key_hook(game.win, input, &game);
-	mlx_key_hook(game.win, handle_key, &game);
 	mlx_loop_hook(game.mlx, combined_loop, &game);
 	mlx_loop(game.mlx);
 }
