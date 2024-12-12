@@ -1,47 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouvement.c                                        :+:      :+:    :+:   */
+/*   player_mouvement.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/01 16:32:18 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/11 09:18:47 by ehenry           ###   ########.fr       */
+/*   Created: 2024/12/12 18:01:23 by ehenry            #+#    #+#             */
+/*   Updated: 2024/12/12 18:01:46 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int can_move_to_tile(t_game *game, int x, int y)
-{
-	char	tile;
-
-	tile = game->map.map[y][x];
-	if (tile == 'E' && game->map.collectibles_remaining <= 0)
-	{
-		ft_printf("WIN!!!");
-		exit_game(game);
-		return (0);
-	}
-	if (tile == '0' || tile == 'C')
-		return (1);
-	return (0);
-}
-
-int	move_to_tile(t_game *game, int x, int y)
-{
-	if (can_move_to_tile(game, x, y))
-	{
-		move_player(game, x, y);
-		return (1);
-	}
-	return (0);
-}
-
 void	move_player(t_game *game, int x, int y)
 {
 	char	old_tile;
-
+	
+	(void)old_tile;
 	old_tile = game->map.map[game->player.player_y][game->player.player_x];
 	game->map.map[game->player.player_y][game->player.player_x] = '0';
 	game->player.player_x = x;

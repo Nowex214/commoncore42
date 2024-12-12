@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:32:18 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/09 10:20:42 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/12 18:00:38 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,22 @@ int	read_map(t_game *game, char *file)
 		game->map.wmap = map_width(game->map.map[0]);
 	find_player(game);
 	return (game->map.map != NULL);
+}
+
+void	process_map(t_game *game)
+{
+	int	height;
+	int	width;
+
+	height = 0;
+	while (height < game->map.hmap)
+	{
+		width = 0;
+		while (game->map.map[height][width])
+		{
+			add_graphics(game, height, width);
+			width++;
+		}
+		height++;
+	}
 }

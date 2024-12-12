@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:22:59 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/11 15:05:59 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/12 18:24:31 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 # define SPRITE_SIZE 96
 # define KEY_ESC 65307
-# define KEY_UP 119			// W
-# define KEY_DOWN 115		// S
-# define KEY_LEFT 97		// A
-# define KEY_RIGHT 100		// D
+# define KEY_UP    122  // Z
+# define KEY_DOWN  115  // S
+# define KEY_LEFT  113  // Q
+# define KEY_RIGHT	100  // D
 # define KEY_INTERACT 101	// E
 
 
@@ -120,6 +120,7 @@ typedef struct	s_player
 	int			life;
 	int			player_x;
 	int			player_y;
+	int			is_moving;
 	void		*life_sprite;
 	char		last_direction;
 }	t_player;
@@ -140,45 +141,46 @@ typedef struct	s_game
 	t_animation	anim;
 }	t_game;
 
-void		load_idle_right(t_game *game);
-void		load_idle_left(t_game *game);
-void		show_life(t_game *game);
-void		count_collectables(t_game *game);
-void		update_camera(t_game *game);
-void		handle_camera(t_game *game, int move_success);
-void		find_player(t_game *game);
-void		process_map(t_game *game);
-void		load_images(t_game *game);
-void		place_graphics(t_game *game, void *image, int height, int width);
-
-int			can_move_to_tile(t_game *game, int x, int y);
-int 		add_graphics(t_game *game, int height, int width);
-int			update_player_animation(void *param);
-int			process_movement(int command, t_game *game);
-int			read_map(t_game *game, char *file);
-int			input(int command, t_game *game);
-int			exit_game(t_game *game);
-int			move_vertical(t_game *game, int direction);
-int			move_horizontal(t_game *game, int direction);
-int			move_to_tile(t_game *game, int x, int y);
-int 		calculate_fps(void *param);
-void 		move_player(t_game *game, int x, int y);
-long long	get_time_in_ms(void);
-
-
-
-
-
-
-//Animation
+//animation
 int			idle_right_loop(t_game *game);
 int			idle_left_loop(t_game *game);
 int 		walk_left_loop(t_game *game);
 int 		walk_right_loop(t_game *game);
-
+//load images
 void		load_idle_right(t_game *game);
 void		load_idle_left(t_game *game);
 void		load_walk_left(t_game *game);
 void		load_walk_right(t_game *game);
+void		load_images(t_game *game);
+//game
+void		load_game(t_game *game);
+int 		setup_game(t_game *game);
+int			exit_game(t_game *game);
+int			initialize_game(t_game *game, char **av);
+//input
+int			input(int command, t_game *game);
+int 		control(int keycode, t_game *game);
+//player
+void 		update_player_animation(t_game *game);
+int			is_player_moving(t_game *game);
+//player_mouvement
+void		move_player(t_game *game, int x, int y);
+//mouvement
+void 		move_player(t_game *game, int x, int y);
+int			move_vertical(t_game *game, int direction);
+int			move_horizontal(t_game *game, int direction);
+int			move_to_tile(t_game *game, int x, int y);
+int			can_move_to_tile(t_game *game, int x, int y);
+//graphics
+void		place_graphics(t_game *game, void *image, int height, int width);
+int 		add_graphics(t_game *game, int height, int width);
+//read map
+void		process_map(t_game *game);
+int			read_map(t_game *game, char *file);
+//tools
+void		count_collectables(t_game *game);
+void		update_camera(t_game *game);
+void		handle_camera(t_game *game, int move_success);
+void		find_player(t_game *game);
 
 #endif

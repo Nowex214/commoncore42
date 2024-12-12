@@ -12,16 +12,20 @@ MINILIBX_DIR = minilibx-linux
 LIBFT = $(LIBFT_DIR)/libft.a
 MINILIBX = $(MINILIBX_DIR)/libmlx.a
 
-SRCS = srcs/core/graphics.c\
+SRCS = srcs/graphics/graphics.c\
 		srcs/core/main.c\
 		srcs/core/read_map.c\
-		srcs/core/control.c\
+		srcs/control/control.c\
 		srcs/tools/camera.c\
-		srcs/core/found.c\
-		srcs/tools/frame.c\
-		srcs/core/mouvement.c\
+		srcs/tools/found.c\
+		srcs/control/mouvement.c\
 		srcs/tools/hud.c\
-		srcs/animation/idle_anim.c
+		srcs/animation/idle_anim.c\
+		srcs/animation/walk_anim.c\
+		srcs/player/player.c\
+		srcs/graphics/load_image.c\
+		srcs/core/game.c\
+		srcs/player/player_mouvement.c
 
 OBJS = $(SRCS:.c=.o)
 
