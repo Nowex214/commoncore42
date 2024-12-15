@@ -1,39 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   walk_anim.c                                        :+:      :+:    :+:   */
+/*   other_anim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 14:59:19 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/14 00:39:32 by ehenry           ###   ########.fr       */
+/*   Created: 2024/12/14 00:17:52 by ehenry            #+#    #+#             */
+/*   Updated: 2024/12/14 18:37:28 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int walk_left_loop(t_game *game)
+int collectabes_loop(t_game *game)
 {
+	int	y;
+	int	x;
+
 	game->anim.delay_counter++;
-	if (game->anim.delay_counter >= 3000)
+	if (game->anim.delay_counter >= 4000)
 	{
 		game->anim.current_frame = (game->anim.current_frame + 1) % 4;
 		game->anim.delay_counter = 0;
 	}
-	place_graphics(game, game->anim.walk_l[game->anim.current_frame], 
-		game->player.player_y, game->player.player_x);
+	y = 0;
+	while (y < game->map.hmap)
+	{
+		x = 0;
+		while (x < game->map.wmap)
+		{
+			if (game->map.map[y][x] == 'C')
+				place_graphics(game, game->anim.collectables[game->anim.current_frame], y, x);
+			x++;
+		}
+		y++;
+	}
 	return (0);
 }
 
-int walk_right_loop(t_game *game)
+int	door_loop(t_game *game)
 {
 	game->anim.delay_counter++;
-	if (game->anim.delay_counter >= 3000)
+	if (game->anim.delay_counter >= 4000)
 	{
 		game->anim.current_frame = (game->anim.current_frame + 1) % 4;
 		game->anim.delay_counter = 0;
 	}
-	place_graphics(game, game->anim.walk_r[game->anim.current_frame], 
-		game->player.player_y, game->player.player_x);
 	return (0);
 }

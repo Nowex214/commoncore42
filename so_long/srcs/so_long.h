@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:22:59 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/12 18:24:31 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/14 18:59:05 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,45 +16,57 @@
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 
-# define SPRITE_SIZE 96
-# define KEY_ESC 65307
-# define KEY_UP    122  // Z
-# define KEY_DOWN  115  // S
-# define KEY_LEFT  113  // Q
-# define KEY_RIGHT	100  // D
-# define KEY_INTERACT 101	// E
+
+# define KEY_ESC 			65307
+# define KEY_UP				122
+# define KEY_DOWN			115
+# define KEY_LEFT			113
+# define KEY_RIGHT			100
+# define KEY_INTERACT 		101
+# define KEY_IDLE			32
 
 
-# define XPM_COLLECTABLE	"sprite/collectable.xpm"
+# define WIN_WIDTH 			960
+# define WIN_HEIGHT 		480
+
+
+# define SPRITE_SIZE 		96
+
 # define XPM_WALL			"sprite/wall.xpm"
 # define XPM_GROUND			"sprite/ground.xpm"
 # define XPM_LIFE_BAR		"sprite/livebar.xpm"
 # define XPM_EXIT_OPEN		"sprite/open_door.xpm"
 # define XPM_EXIT_CLOSE 	"sprite/close_door.xpm"
 
-# define XPM_WALK_R0	"sprite/player/walk_right/1.xpm"
-# define XPM_WALK_R1	"sprite/player/walk_right/2.xpm"
-# define XPM_WALK_R2	"sprite/player/walk_right/3.xpm"
-# define XPM_WALK_R3	"sprite/player/walk_right/4.xpm"
+# define XPM_WALK_R0		"sprite/player/walk_right/1.xpm"
+# define XPM_WALK_R1		"sprite/player/walk_right/2.xpm"
+# define XPM_WALK_R2		"sprite/player/walk_right/3.xpm"
+# define XPM_WALK_R3		"sprite/player/walk_right/4.xpm"
 
-# define XPM_WALK_L0	"sprite/player/walk_left/1.xpm"
-# define XPM_WALK_L1	"sprite/player/walk_left/2.xpm"
-# define XPM_WALK_L2	"sprite/player/walk_left/3.xpm"
-# define XPM_WALK_L3	"sprite/player/walk_left/4.xpm"
+# define XPM_WALK_L0		"sprite/player/walk_left/1.xpm"
+# define XPM_WALK_L1		"sprite/player/walk_left/2.xpm"
+# define XPM_WALK_L2		"sprite/player/walk_left/3.xpm"
+# define XPM_WALK_L3		"sprite/player/walk_left/4.xpm"
 
-# define XPM_IDLE_L0	"sprite/player/idle_left/1.xpm"
-# define XPM_IDLE_L1	"sprite/player/idle_left/2.xpm"
-# define XPM_IDLE_L2	"sprite/player/idle_left/3.xpm"
-# define XPM_IDLE_L3	"sprite/player/idle_left/4.xpm"
+# define XPM_IDLE_L0		"sprite/player/idle_left/1.xpm"
+# define XPM_IDLE_L1		"sprite/player/idle_left/2.xpm"
+# define XPM_IDLE_L2		"sprite/player/idle_left/3.xpm"
+# define XPM_IDLE_L3		"sprite/player/idle_left/4.xpm"
 
-# define XPM_IDLE_R0	"sprite/player/idle_right/1.xpm"
-# define XPM_IDLE_R1	"sprite/player/idle_right/2.xpm"
-# define XPM_IDLE_R2	"sprite/player/idle_right/3.xpm"
-# define XPM_IDLE_R3	"sprite/player/idle_right/4.xpm"
+# define XPM_IDLE_R0		"sprite/player/idle_right/1.xpm"
+# define XPM_IDLE_R1		"sprite/player/idle_right/2.xpm"
+# define XPM_IDLE_R2		"sprite/player/idle_right/3.xpm"
+# define XPM_IDLE_R3		"sprite/player/idle_right/4.xpm"
 
+# define XPM_COLLECTABLES_0	"sprite/collectables/1.xpm"
+# define XPM_COLLECTABLES_1	"sprite/collectables/2.xpm"
+# define XPM_COLLECTABLES_2	"sprite/collectables/3.xpm"
+# define XPM_COLLECTABLES_3	"sprite/collectables/4.xpm"
 
-# define WIN_WIDTH 1008
-# define WIN_HEIGHT 528
+# define XPM_DOOR_0			"sprite/door/1.xpm"
+# define XPM_DOOR_1			"sprite/door/2.xpm"
+# define XPM_DOOR_2			"sprite/door/3.xpm"
+# define XPM_DOOR_3			"sprite/door/4.xpm"
 
 
 typedef struct	s_map
@@ -81,6 +93,7 @@ typedef struct	s_imput
 	int	left;
 	int	right;
 	int	interact;
+	int	idle;
 }	t_imput;
 
 typedef struct	s_cam
@@ -97,6 +110,8 @@ typedef struct	s_animation
 	void	*idle_r[4];
 	void	*walk_r[4];
 	void	*walk_l[4];
+	void	*collectables[4];
+	void	*door[4];
 
 	int		delay_between_frames;
 	int		frame_count;
@@ -146,13 +161,18 @@ int			idle_right_loop(t_game *game);
 int			idle_left_loop(t_game *game);
 int 		walk_left_loop(t_game *game);
 int 		walk_right_loop(t_game *game);
+int 		collectabes_loop(t_game *game);
+int			door_loop(t_game *game);
 //load images
 void		load_idle_right(t_game *game);
 void		load_idle_left(t_game *game);
 void		load_walk_left(t_game *game);
 void		load_walk_right(t_game *game);
 void		load_images(t_game *game);
+void		load_collectables(t_game *game);
+void		load_door(t_game *game);
 //game
+void		cleanup_game(t_game *game);
 void		load_game(t_game *game);
 int 		setup_game(t_game *game);
 int			exit_game(t_game *game);
@@ -182,5 +202,8 @@ void		count_collectables(t_game *game);
 void		update_camera(t_game *game);
 void		handle_camera(t_game *game, int move_success);
 void		find_player(t_game *game);
+void		setup_hooks(t_game *game);
+int			key_release(int	keycode, t_game *game);
+int			key_pressed(int keycode, t_game *game);
 
 #endif

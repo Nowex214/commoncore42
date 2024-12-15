@@ -25,7 +25,10 @@ SRCS = srcs/graphics/graphics.c\
 		srcs/player/player.c\
 		srcs/graphics/load_image.c\
 		srcs/core/game.c\
-		srcs/player/player_mouvement.c
+		srcs/player/player_mouvement.c\
+		srcs/tools/key.c\
+		srcs/graphics/load_image2.c\
+		srcs/animation/other_anim.c
 
 OBJS = $(SRCS:.c=.o)
 

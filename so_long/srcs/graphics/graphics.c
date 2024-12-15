@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:52:54 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/12 18:00:46 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/14 00:17:15 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int add_graphics(t_game *game, int height, int width)
 		place_graphics(game, game->map.wall, height, width);
 	else if (game->map.map[height][width] == '0' && game->map.ground)
 		place_graphics(game, game->map.ground, height, width);
-	else if (game->map.map[height][width] == 'C' && game->map.collectible)
-		place_graphics(game, game->map.collectible, height, width);
 	else if (game->map.map[height][width] == 'E' && game->map.door_close)
 		place_graphics(game, game->map.door_close, height, width);
 	return (0);

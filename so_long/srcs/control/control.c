@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:32:56 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/12 18:12:38 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/14 00:38:27 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int control(int keycode, t_game *game)
 		game->player.last_direction = 'R';
 		game->player.is_moving = move_horizontal(game, 1);
 	}
-
+	else if (keycode == KEY_IDLE)
+		game->player.is_moving = 0;
 	return (game->player.is_moving);
 }
 
