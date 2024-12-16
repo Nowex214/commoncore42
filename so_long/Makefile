@@ -28,7 +28,9 @@ SRCS = srcs/graphics/graphics.c\
 		srcs/player/player_mouvement.c\
 		srcs/tools/key.c\
 		srcs/graphics/load_image2.c\
-		srcs/animation/other_anim.c
+		srcs/animation/other_anim.c\
+		srcs/core/free.c
+
 
 OBJS = $(SRCS:.c=.o)
 

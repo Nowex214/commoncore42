@@ -1,56 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   found.c                                            :+:      :+:    :+:   */
+/*   enemy.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 20:03:54 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/16 15:08:13 by ehenry           ###   ########.fr       */
+/*   Created: 2024/12/16 11:31:11 by ehenry            #+#    #+#             */
+/*   Updated: 2024/12/16 15:44:59 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	count_collectables(t_game *game)
+int	count_enemies(t_game *game)
 {
-	int	y;
 	int	x;
+	int	y;
+	int	count;
 
-	game->map.collectibles_remaining = 0;
 	y = 0;
-	while (y < game->map.hmap)
+	count = 0;
+	while (game->map.map[y])
 	{
 		x = 0;
-		while (x < game->map.wmap)
+		while (game->map.map[y][x])
 		{
-			if (game->map.map[y][x] == 'C')
-				game->map.collectibles_remaining++;
+			if (game->map.map[y][x] == 'X')
+				count++;
 			x++;
 		}
 		y++;
 	}
+	return (count);
 }
 
-void	find_player(t_game *game)
+void	set_enemy_data(t_enemy *enemy, int x, int y)
 {
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < game->map.hmap)
-	{
-		x = 0;
-		while (x < game->map.wmap)
-		{
-			if (game->map.map[y][x] == 'P')
-			{
-				game->player.player_x = x;
-				game->player.player_y = y;
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
+	enemy->x = x;
+	enemy->y = y;
+	enemy->direction = 0;
 }
+
+void	init_enemies(t_game *game)
+{
+	int	x;
+	int	y;
+	int	i;
+
+	game->enemies_count = count_enemies(game->data);
+	game->enemies = malloc(sizeof(t_game) * (game->enemies_count));
+	
+}
+

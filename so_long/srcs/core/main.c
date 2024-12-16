@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:15:18 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/14 19:00:17 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/16 11:15:50 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ int	main(int ac, char **av)
 	mlx_key_hook(game.win, input, &game);
 	mlx_loop_hook(game.mlx, combined_loop, &game);
 	mlx_loop(game.mlx);
-	cleanup_game(&game);
+	cleanup_and_exit(&game);
 	return (0);
 }

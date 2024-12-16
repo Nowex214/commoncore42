@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 00:17:52 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/14 18:37:28 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/16 10:25:38 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int collectabes_loop(t_game *game)
 	int	x;
 
 	game->anim.delay_counter++;
-	if (game->anim.delay_counter >= 4000)
+	if (game->anim.delay_counter >= 5000)
 	{
 		game->anim.current_frame = (game->anim.current_frame + 1) % 4;
 		game->anim.delay_counter = 0;
@@ -41,7 +41,7 @@ int collectabes_loop(t_game *game)
 int	door_loop(t_game *game)
 {
 	game->anim.delay_counter++;
-	if (game->anim.delay_counter >= 4000)
+	if (game->anim.delay_counter >= 5000)
 	{
 		game->anim.current_frame = (game->anim.current_frame + 1) % 4;
 		game->anim.delay_counter = 0;

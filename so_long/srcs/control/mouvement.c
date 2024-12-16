@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:32:18 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/12 18:02:34 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/16 11:14:16 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int can_move_to_tile(t_game *game, int x, int y)
 	if (tile == 'E' && game->map.collectibles_remaining <= 0)
 	{
 		ft_printf("WIN!!!");
-		exit_game(game);
+		cleanup_and_exit(game);
 		return (0);
 	}
 	if (tile == '0' || tile == 'C')

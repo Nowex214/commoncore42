@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:32:56 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/14 00:38:27 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/16 11:14:01 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int control(int keycode, t_game *game)
 	game->player.is_moving = 0;
 
 	if (keycode == KEY_ESC)
-		exit_game(game);
+		cleanup_and_exit(game);
 	if (keycode == KEY_UP)
 		game->player.is_moving = move_vertical(game, -1);
 	else if (keycode == KEY_DOWN)

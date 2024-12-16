@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 14:59:19 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/14 00:39:32 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/16 10:25:45 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int walk_left_loop(t_game *game)
 {
 	game->anim.delay_counter++;
-	if (game->anim.delay_counter >= 3000)
+	if (game->anim.delay_counter >= 5000)
 	{
 		game->anim.current_frame = (game->anim.current_frame + 1) % 4;
 		game->anim.delay_counter = 0;
@@ -28,7 +28,7 @@ int walk_left_loop(t_game *game)
 int walk_right_loop(t_game *game)
 {
 	game->anim.delay_counter++;
-	if (game->anim.delay_counter >= 3000)
+	if (game->anim.delay_counter >= 5000)
 	{
 		game->anim.current_frame = (game->anim.current_frame + 1) % 4;
 		game->anim.delay_counter = 0;

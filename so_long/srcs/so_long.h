@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:22:59 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/14 18:59:05 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/16 15:08:21 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 
 # define KEY_ESC 			65307
-# define KEY_UP				122
+# define KEY_UP				119
 # define KEY_DOWN			115
-# define KEY_LEFT			113
+# define KEY_LEFT			97
 # define KEY_RIGHT			100
 # define KEY_INTERACT 		101
 # define KEY_IDLE			32
@@ -37,6 +37,7 @@
 # define XPM_LIFE_BAR		"sprite/livebar.xpm"
 # define XPM_EXIT_OPEN		"sprite/open_door.xpm"
 # define XPM_EXIT_CLOSE 	"sprite/close_door.xpm"
+# define XPM_ENEMY			"sprite/enemy.xpm"
 
 # define XPM_WALK_R0		"sprite/player/walk_right/1.xpm"
 # define XPM_WALK_R1		"sprite/player/walk_right/2.xpm"
@@ -84,6 +85,7 @@ typedef struct	s_map
 	void		*collectible;
 	void		*player_left;
 	void		*player_right;
+	void		*enemy;
 }	t_map;
 
 typedef struct	s_imput
@@ -140,20 +142,28 @@ typedef struct	s_player
 	char		last_direction;
 }	t_player;
 
+typedef struct	s_enemy
+{
+	int	x;
+	int	y;
+	int	direction;
+}	t_enemy;
+
 typedef struct	s_game
 {
 	void		*mlx;
 	void		*win;
 
+	int			data;
 	int			fd;
-	int			fps;
+	int			enemies_count;
 
-	long long	lenght;
 	t_map		map;
 	t_cam		cam;
 	t_player	player;
 	t_imput		input;
 	t_animation	anim;
+	t_enemy		*enemies;
 }	t_game;
 
 //animation
@@ -172,10 +182,8 @@ void		load_images(t_game *game);
 void		load_collectables(t_game *game);
 void		load_door(t_game *game);
 //game
-void		cleanup_game(t_game *game);
 void		load_game(t_game *game);
 int 		setup_game(t_game *game);
-int			exit_game(t_game *game);
 int			initialize_game(t_game *game, char **av);
 //input
 int			input(int command, t_game *game);
@@ -205,5 +213,11 @@ void		find_player(t_game *game);
 void		setup_hooks(t_game *game);
 int			key_release(int	keycode, t_game *game);
 int			key_pressed(int keycode, t_game *game);
-
+//free
+void		destroy_animations(t_game *game);
+void		destroy_map_images(t_game *game);
+void		destroy_window_and_display(t_game *game);
+void		free_map(t_game *game);
+void		cleanup_and_exit(t_game *game);
+//enemy
 #endif

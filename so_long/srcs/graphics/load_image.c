@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:57:36 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/14 00:30:24 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/16 14:06:11 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	load_images(t_game *game)
 	game->map.wall = mlx_xpm_file_to_image(game->mlx, XPM_WALL, &width, &height);
 	game->map.door_open = mlx_xpm_file_to_image(game->mlx, XPM_EXIT_OPEN, &width, &height);
 	game->map.door_close = mlx_xpm_file_to_image(game->mlx, XPM_EXIT_CLOSE, &width, &height);
+	game->map.enemy = mlx_xpm_file_to_image(game->mlx, XPM_ENEMY, &width, &height);
 }
 
 void	load_idle_left(t_game *game)
