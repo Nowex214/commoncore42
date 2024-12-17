@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:22:59 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/16 15:08:21 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/17 13:28:39 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ int			move_vertical(t_game *game, int direction);
 int			move_horizontal(t_game *game, int direction);
 int			move_to_tile(t_game *game, int x, int y);
 int			can_move_to_tile(t_game *game, int x, int y);
+int			can_enemies_move(t_game *game, int x, int y);
 //graphics
 void		place_graphics(t_game *game, void *image, int height, int width);
 int 		add_graphics(t_game *game, int height, int width);
@@ -210,6 +211,8 @@ void		count_collectables(t_game *game);
 void		update_camera(t_game *game);
 void		handle_camera(t_game *game, int move_success);
 void		find_player(t_game *game);
+void		find_enemies(t_game *game);
+void		set_enemy_data(t_enemy *enemy, int x, int y);
 void		setup_hooks(t_game *game);
 int			key_release(int	keycode, t_game *game);
 int			key_pressed(int keycode, t_game *game);
@@ -220,4 +223,10 @@ void		destroy_window_and_display(t_game *game);
 void		free_map(t_game *game);
 void		cleanup_and_exit(t_game *game);
 //enemy
+int			count_enemies(t_game *game);
+void		set_enemy_data(t_enemy *enemy, int x, int y);
+void		move_enemy(t_game *game, t_enemy *enemy);
+void		move_enemies(t_game *game);
+//hud
+int			display_move(t_game *game, int command);
 #endif

@@ -29,7 +29,8 @@ SRCS = srcs/graphics/graphics.c\
 		srcs/tools/key.c\
 		srcs/graphics/load_image2.c\
 		srcs/animation/other_anim.c\
-		srcs/core/free.c
+		srcs/core/free.c\
+		srcs/enemy/enemy.c
 
 
 OBJS = $(SRCS:.c=.o)

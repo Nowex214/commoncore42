@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:32:18 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/16 11:14:16 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/17 13:19:06 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,11 @@ int	move_to_tile(t_game *game, int x, int y)
 	return (0);
 }
 
+int	can_enemies_move(t_game *game, int x, int y)
+{
+	if (x < 0 || y < 0 || x >= game->map.wmap || y >= game->map.hmap)
+		return (0);
+	if (game->map.map[y][x] == '0')
+		return (1);
+	return (0);
+}
