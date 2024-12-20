@@ -6,22 +6,23 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 21:50:13 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/17 13:35:16 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/20 17:58:31 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	display_move(t_game *game, int command)
+void	display_move_collectables(t_game *game)
 {
-	int	move_success;
 	char	*text;
+	char	*coll_text;
 
 	text = ft_itoa(game->player.mouvement);
-	move_success = control(command, game);
-	if (move_success)
-	{
-		mlx_string_put(game->mlx, game->win, 10, 40, 0xFFFFFF, text);
-	}
-	return(game->player.mouvement);
+	coll_text = ft_itoa(game->map.collectibles_remaining);
+	if (!text || !coll_text)
+		return ;
+	mlx_string_put(game->mlx, game->win, 180, 55, 0xFFFFFF, coll_text);
+	mlx_string_put(game->mlx, game->win, 95, 55, 0xFFFFFF, text);
+	free (text);
+	free (coll_text);
 }

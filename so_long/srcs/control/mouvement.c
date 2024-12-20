@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 16:32:18 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/17 13:19:06 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/20 18:25:38 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ int can_move_to_tile(t_game *game, int x, int y)
 	}
 	if (tile == '0' || tile == 'C')
 		return (1);
+	if (tile == 'X')
+	{
+		mlx_put_image_to_window(game->mlx, game->win, game->map.dead, 384, 216);
+		mlx_do_sync(game->mlx);
+		usleep(3000000);
+		cleanup_and_exit(game);
+		return (0);
+	}
 	return (0);
 }
 

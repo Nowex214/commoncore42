@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:22:59 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/17 13:28:39 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/20 18:17:20 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@
 
 # define KEY_ESC 			65307
 # define KEY_UP				119
+# define KEY_UP_DIR			65362
 # define KEY_DOWN			115
+# define KEY_DOWN_DIR		65364
 # define KEY_LEFT			97
+# define KEY_LEFT_DIR		65361
 # define KEY_RIGHT			100
+# define KEY_RIGHT_DIR		65363
 # define KEY_INTERACT 		101
 # define KEY_IDLE			32
 
@@ -35,8 +39,8 @@
 # define XPM_WALL			"sprite/wall.xpm"
 # define XPM_GROUND			"sprite/ground.xpm"
 # define XPM_LIFE_BAR		"sprite/livebar.xpm"
-# define XPM_EXIT_OPEN		"sprite/open_door.xpm"
-# define XPM_EXIT_CLOSE 	"sprite/close_door.xpm"
+# define XPM_DOOR_CLOSE		"sprite/door/1.xpm"
+# define XPM_DOOR_OPEN		"sprite/door/4.xpm"
 # define XPM_ENEMY			"sprite/enemy.xpm"
 
 # define XPM_WALK_R0		"sprite/player/walk_right/1.xpm"
@@ -64,20 +68,20 @@
 # define XPM_COLLECTABLES_2	"sprite/collectables/3.xpm"
 # define XPM_COLLECTABLES_3	"sprite/collectables/4.xpm"
 
-# define XPM_DOOR_0			"sprite/door/1.xpm"
-# define XPM_DOOR_1			"sprite/door/2.xpm"
-# define XPM_DOOR_2			"sprite/door/3.xpm"
-# define XPM_DOOR_3			"sprite/door/4.xpm"
-
+# define XPM_HUD			"sprite/HUD.xpm"
+# define XPM_DEAD			"sprite/fin.xpm"
 
 typedef struct	s_map
 {
 	char		**map;
 
 	int			collectibles_remaining;
+	int			show_dead_image;
 	int			wmap;
 	int			hmap;
 
+	void		*dead;
+	void		*hud;
 	void		*ground;
 	void		*wall;
 	void 		*door_close;
@@ -113,7 +117,6 @@ typedef struct	s_animation
 	void	*walk_r[4];
 	void	*walk_l[4];
 	void	*collectables[4];
-	void	*door[4];
 
 	int		delay_between_frames;
 	int		frame_count;
@@ -147,6 +150,8 @@ typedef struct	s_enemy
 	int	x;
 	int	y;
 	int	direction;
+	int	move_delay;
+	int	move_timer;
 }	t_enemy;
 
 typedef struct	s_game
@@ -172,7 +177,6 @@ int			idle_left_loop(t_game *game);
 int 		walk_left_loop(t_game *game);
 int 		walk_right_loop(t_game *game);
 int 		collectabes_loop(t_game *game);
-int			door_loop(t_game *game);
 //load images
 void		load_idle_right(t_game *game);
 void		load_idle_left(t_game *game);
@@ -180,7 +184,6 @@ void		load_walk_left(t_game *game);
 void		load_walk_right(t_game *game);
 void		load_images(t_game *game);
 void		load_collectables(t_game *game);
-void		load_door(t_game *game);
 //game
 void		load_game(t_game *game);
 int 		setup_game(t_game *game);
@@ -191,6 +194,7 @@ int 		control(int keycode, t_game *game);
 //player
 void 		update_player_animation(t_game *game);
 int			is_player_moving(t_game *game);
+void		kill_player(t_game *game);
 //player_mouvement
 void		move_player(t_game *game, int x, int y);
 //mouvement
@@ -209,13 +213,10 @@ int			read_map(t_game *game, char *file);
 //tools
 void		count_collectables(t_game *game);
 void		update_camera(t_game *game);
-void		handle_camera(t_game *game, int move_success);
+void 		handle_camera(t_game *game, int move_success);
 void		find_player(t_game *game);
 void		find_enemies(t_game *game);
 void		set_enemy_data(t_enemy *enemy, int x, int y);
-void		setup_hooks(t_game *game);
-int			key_release(int	keycode, t_game *game);
-int			key_pressed(int keycode, t_game *game);
 //free
 void		destroy_animations(t_game *game);
 void		destroy_map_images(t_game *game);
@@ -227,6 +228,9 @@ int			count_enemies(t_game *game);
 void		set_enemy_data(t_enemy *enemy, int x, int y);
 void		move_enemy(t_game *game, t_enemy *enemy);
 void		move_enemies(t_game *game);
+void		init_enemies(t_game *game);
+void		get_new_position(t_enemy *enemy, int *new_x, int *new_y);
 //hud
-int			display_move(t_game *game, int command);
+void		display_move_collectables(t_game *game);
+
 #endif

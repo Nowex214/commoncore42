@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:57:36 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/16 14:06:11 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/20 18:11:56 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void	load_images(t_game *game)
 
 	game->map.ground = mlx_xpm_file_to_image(game->mlx, XPM_GROUND, &width, &height);
 	game->map.wall = mlx_xpm_file_to_image(game->mlx, XPM_WALL, &width, &height);
-	game->map.door_open = mlx_xpm_file_to_image(game->mlx, XPM_EXIT_OPEN, &width, &height);
-	game->map.door_close = mlx_xpm_file_to_image(game->mlx, XPM_EXIT_CLOSE, &width, &height);
 	game->map.enemy = mlx_xpm_file_to_image(game->mlx, XPM_ENEMY, &width, &height);
+	game->map.door_close = mlx_xpm_file_to_image(game->mlx, XPM_DOOR_CLOSE, &width, &height);
+	game->map.door_open = mlx_xpm_file_to_image(game->mlx, XPM_DOOR_OPEN, &width, &height);
+	game->map.hud = mlx_xpm_file_to_image(game->mlx, XPM_HUD, &width, &height);
+	game->map.dead = mlx_xpm_file_to_image(game->mlx, XPM_DEAD, &width, &height);
 }
 
 void	load_idle_left(t_game *game)

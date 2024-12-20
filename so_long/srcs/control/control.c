@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:32:56 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/16 11:14:01 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/19 11:20:27 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ int control(int keycode, t_game *game)
 
 	if (keycode == KEY_ESC)
 		cleanup_and_exit(game);
-	if (keycode == KEY_UP)
+	if (keycode == KEY_UP || keycode == KEY_UP_DIR)
 		game->player.is_moving = move_vertical(game, -1);
-	else if (keycode == KEY_DOWN)
+	else if (keycode == KEY_DOWN || keycode == KEY_DOWN_DIR)
 		game->player.is_moving = move_vertical(game, 1);
-	else if (keycode == KEY_LEFT)
+	else if (keycode == KEY_LEFT || keycode == KEY_LEFT_DIR)
 	{
 		game->player.last_direction = 'L';
 		game->player.is_moving = move_horizontal(game, -1);
 	}
-	else if (keycode == KEY_RIGHT)
+	else if (keycode == KEY_RIGHT || keycode == KEY_RIGHT_DIR)
 	{
 		game->player.last_direction = 'R';
 		game->player.is_moving = move_horizontal(game, 1);
@@ -42,11 +42,6 @@ int	input(int command, t_game *game)
 	int	move_success;
 
 	move_success = control(command, game);
-	if (move_success)
-	{
-		ft_printf("Movement: %d\n", game->player.mouvement);
-		ft_printf("Collectables: %d\n", game->map.collectibles_remaining);
-	}
 	handle_camera(game, move_success);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:15:18 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/17 13:34:53 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/20 18:24:18 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	combined_loop(void *param)
 	t_game *game = (t_game *)param;
 	update_player_animation(game);
 	collectabes_loop(game);
+	move_enemies(game);
+	display_move_collectables(game);
 	return (0);
 }
 
@@ -29,7 +31,6 @@ int	main(int ac, char **av)
 	if (!initialize_game(&game, av))
 		return (0);
 	setup_game(&game);
-	setup_hooks(&game);
 	mlx_key_hook(game.win, input, &game);
 	mlx_loop_hook(game.mlx, combined_loop, &game);
 	mlx_loop(game.mlx);

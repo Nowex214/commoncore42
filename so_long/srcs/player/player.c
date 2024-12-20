@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:28:31 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/13 01:51:33 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/20 17:59:38 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void update_player_animation(t_game *game)
 	}
 }
 
-
 int	is_player_moving(t_game *game)
 {
 	if (game->input.up || game->input.down || game->input.left || game->input.right)
@@ -40,3 +39,4 @@ int	is_player_moving(t_game *game)
 	}
 	return (0);
 }
+

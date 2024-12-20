@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:05:17 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/17 13:12:27 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/20 17:19:36 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ void	load_game(t_game *game)
 {
 	count_collectables(game);
 	find_player(game);
-	move_enemies(game);
 	load_idle_left(game);
 	load_idle_right(game);
 	load_walk_left(game);
 	load_walk_right(game);
 	load_collectables(game);
-	load_door(game);
 	update_camera(game);
 }
 
@@ -50,6 +48,7 @@ int	initialize_game(t_game *game, char **av)
 		return (0);
 	}
 	game->player.last_direction = 'R';
+	init_enemies(game);
 	load_game(game);
 	return (1);
 }

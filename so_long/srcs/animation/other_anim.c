@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 00:17:52 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/17 10:58:24 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/20 14:39:15 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,6 @@ int collectabes_loop(t_game *game)
 			x++;
 		}
 		y++;
-	}
-	return (0);
-}
-
-int	door_loop(t_game *game)
-{
-	game->anim.delay_counter++;
-	if (game->anim.delay_counter >= 7000)
-	{
-		game->anim.current_frame = (game->anim.current_frame + 1) % 4;
-		game->anim.delay_counter = 0;
 	}
 	return (0);
 }

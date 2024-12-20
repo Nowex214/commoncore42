@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 18:26:26 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/10 11:19:28 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/20 17:29:24 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 void update_camera(t_game *game)
 {
-	int	player_x;
-	int	player_y;
-
-	player_x = game->player.player_x * SPRITE_SIZE;
-	player_y = game->player.player_y * SPRITE_SIZE;
+	int player_x = game->player.player_x * SPRITE_SIZE;
+	int player_y = game->player.player_y * SPRITE_SIZE;
 	if (player_x < game->cam.cam_x)
 		game->cam.cam_x -= WIN_WIDTH;
 	else if (player_x >= game->cam.cam_x + WIN_WIDTH)
 		game->cam.cam_x += WIN_WIDTH;
+
 	if (player_y < game->cam.cam_y)
 		game->cam.cam_y -= WIN_HEIGHT;
 	else if (player_y >= game->cam.cam_y + WIN_HEIGHT)
@@ -38,16 +36,13 @@ void update_camera(t_game *game)
 		game->cam.cam_y = (game->map.hmap * SPRITE_SIZE) - WIN_HEIGHT;
 }
 
-
 void handle_camera(t_game *game, int move_success)
 {
-	int player_x;
-	int	player_y;
+	int player_x = game->player.player_x * SPRITE_SIZE;
+	int player_y = game->player.player_y * SPRITE_SIZE;
 
 	if (move_success)
 	{
-		player_x = game->player.player_x * SPRITE_SIZE;
-		player_y = game->player.player_y * SPRITE_SIZE;
 		if (player_x < game->cam.cam_x || player_x >= game->cam.cam_x + WIN_WIDTH ||
 			player_y < game->cam.cam_y || player_y >= game->cam.cam_y + WIN_HEIGHT)
 		{
@@ -57,4 +52,3 @@ void handle_camera(t_game *game, int move_success)
 		process_map(game);
 	}
 }
-

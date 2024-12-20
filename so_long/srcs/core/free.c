@@ -6,7 +6,7 @@
 /*   By: ehenry <ehenry@student.42luxembourg.lu>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 11:07:53 by ehenry            #+#    #+#             */
-/*   Updated: 2024/12/16 11:08:17 by ehenry           ###   ########.fr       */
+/*   Updated: 2024/12/20 14:20:59 by ehenry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	destroy_animations(t_game *game)
 			mlx_destroy_image(game->mlx, game->anim.walk_r[i]);
 		if (game->anim.collectables[i])
 			mlx_destroy_image(game->mlx, game->anim.collectables[i]);
-		if (game->anim.door[i])
-			mlx_destroy_image(game->mlx, game->anim.door[i]);
 		i++;
 	}
 }
